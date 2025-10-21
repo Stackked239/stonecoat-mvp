@@ -36,6 +36,13 @@ export default function ProLayout({ children }: ProLayoutProps) {
     setSession(getProSession());
   }, []);
 
+  // Update session when pathname changes (to catch login redirects)
+  useEffect(() => {
+    if (isClient) {
+      setSession(getProSession());
+    }
+  }, [isClient, pathname]);
+
   // Protected route logic - redirect to login if not authenticated
   useEffect(() => {
     if (isClient && !session && pathname !== '/pro/login') {

@@ -36,6 +36,13 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     setSession(getAdminSession());
   }, []);
 
+  // Update session when pathname changes (to catch login redirects)
+  useEffect(() => {
+    if (isClient) {
+      setSession(getAdminSession());
+    }
+  }, [isClient, pathname]);
+
   // Protected route logic - redirect to login if not authenticated
   useEffect(() => {
     if (isClient && !session && pathname !== '/admin/login') {
