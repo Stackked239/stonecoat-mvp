@@ -172,11 +172,11 @@ export default function NewOrderPage() {
                 <div className="flex items-start gap-4">
                   {/* Product Info */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                    <h3 className="text-lg font-semibold text-brand-black mb-1">
                       {item.product.name}
                     </h3>
-                    <p className="text-sm text-gray-500 mb-2">{item.product.sku}</p>
-                    <p className="text-sm text-gray-600 line-clamp-2 mb-3">
+                    <p className="text-sm text-brand-black/50 mb-2">{item.product.sku}</p>
+                    <p className="text-sm text-brand-black/70 line-clamp-2 mb-3">
                       {item.product.description}
                     </p>
 
@@ -221,10 +221,10 @@ export default function NewOrderPage() {
 
                   {/* Pricing */}
                   <div className="text-right">
-                    <div className="text-sm text-gray-500 mb-1">
+                    <div className="text-sm text-brand-black/60 mb-1">
                       {formatCurrency(item.product.proCost)} / {item.product.unit}
                     </div>
-                    <div className="text-xl font-bold text-gray-900">
+                    <div className="text-xl font-bold text-brand-orange">
                       {formatCurrency(item.subtotal)}
                     </div>
                   </div>
@@ -245,22 +245,22 @@ export default function NewOrderPage() {
           {/* Order Summary */}
           <div className="lg:col-span-1">
             <Card>
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Order Summary</h2>
+              <h2 className="text-lg font-semibold text-brand-black mb-4">Order Summary</h2>
 
               <div className="space-y-3 mb-6">
                 {/* Subtotal */}
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Subtotal</span>
-                  <span className="text-gray-900">{formatCurrency(totals.subtotal)}</span>
+                  <span className="text-brand-black/70">Subtotal</span>
+                  <span className="text-brand-black">{formatCurrency(totals.subtotal)}</span>
                 </div>
 
                 {/* Discount */}
                 {totals.discount > 0 && (
                   <div className="flex justify-between text-sm">
-                    <span className="text-green-600">
+                    <span className="text-accent-green">
                       Pro Discount ({totals.discountPercent}%)
                     </span>
-                    <span className="text-green-600">
+                    <span className="text-accent-green">
                       -{formatCurrency(totals.discount)}
                     </span>
                   </div>
@@ -268,10 +268,10 @@ export default function NewOrderPage() {
 
                 {/* Shipping */}
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Shipping</span>
-                  <span className="text-gray-900">
+                  <span className="text-brand-black/70">Shipping</span>
+                  <span className="text-brand-black">
                     {totals.shipping === 0 ? (
-                      <span className="text-green-600">FREE</span>
+                      <span className="text-accent-green font-medium">FREE</span>
                     ) : (
                       formatCurrency(totals.shipping)
                     )}
@@ -280,7 +280,7 @@ export default function NewOrderPage() {
 
                 {/* Shipping threshold message */}
                 {totals.shipping > 0 && (
-                  <div className="text-xs text-gray-500">
+                  <div className="text-xs text-brand-black/60">
                     Add {formatCurrency(BUSINESS_CONSTANTS.FREE_SHIPPING_THRESHOLD - totals.subtotal)}{' '}
                     more for free shipping
                   </div>
@@ -288,17 +288,17 @@ export default function NewOrderPage() {
 
                 {/* Tax */}
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">
+                  <span className="text-brand-black/70">
                     Tax ({BUSINESS_CONSTANTS.SALES_TAX_RATE_PERCENT}%)
                   </span>
-                  <span className="text-gray-900">{formatCurrency(totals.tax)}</span>
+                  <span className="text-brand-black">{formatCurrency(totals.tax)}</span>
                 </div>
 
                 {/* Total */}
-                <div className="pt-3 border-t border-gray-200">
+                <div className="pt-3 border-t border-brand-orange/30">
                   <div className="flex justify-between items-baseline">
-                    <span className="text-base font-semibold text-gray-900">Total</span>
-                    <span className="text-2xl font-bold text-gray-900">
+                    <span className="text-base font-semibold text-brand-black">Total</span>
+                    <span className="text-2xl font-bold text-brand-orange">
                       {formatCurrency(totals.total)}
                     </span>
                   </div>
@@ -317,7 +317,7 @@ export default function NewOrderPage() {
               </Button>
 
               {/* Payment Info */}
-              <div className="mt-4 text-xs text-gray-500 text-center">
+              <div className="mt-4 text-xs text-brand-black/60 text-center">
                 Payment method will be selected during checkout.
                 <br />
                 Net 30 terms available for approved accounts.
@@ -327,8 +327,8 @@ export default function NewOrderPage() {
             {/* Help Text */}
             <Card className="mt-4">
               <div className="text-sm">
-                <h3 className="font-semibold text-gray-900 mb-2">Need Help?</h3>
-                <p className="text-gray-600 text-xs">
+                <h3 className="font-semibold text-brand-black mb-2">Need Help?</h3>
+                <p className="text-brand-black/70 text-xs">
                   Contact our support team for bulk orders, custom pricing, or technical questions.
                 </p>
               </div>

@@ -1,183 +1,98 @@
+'use client';
+
 /**
- * Input Component
- * Form input component with label, error messages, and validation states
- * Supports text, email, number, and tel input types
+ * Stone Coat Countertops - Form Components
+ *
+ * Branded input, textarea, select, and form components
  */
 
-import { InputHTMLAttributes, ReactNode, forwardRef } from 'react';
-import { cn } from '@/lib/utils/cn';
+import React, { forwardRef } from 'react';
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  /**
-   * Input label text
-   */
+// ============================================
+// INPUT COMPONENT
+// ============================================
+
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-
-  /**
-   * Error message to display below input
-   */
   error?: string;
-
-  /**
-   * Helper text to display below input (shown when no error)
-   */
   helperText?: string;
-
-  /**
-   * Icon to display at the start of input
-   */
-  startIcon?: ReactNode;
-
-  /**
-   * Icon to display at the end of input
-   */
-  endIcon?: ReactNode;
-
-  /**
-   * Full width input
-   */
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
   fullWidth?: boolean;
 }
 
-/**
- * Accessible input component with validation states
- *
- * @example
- * ```tsx
- * <Input
- *   label="Email Address"
- *   type="email"
- *   placeholder="you@example.com"
- *   error={errors.email}
- *   required
- * />
- *
- * <Input
- *   label="Square Footage"
- *   type="number"
- *   helperText="Enter total area to be coated"
- *   min={50}
- *   max={50000}
- * />
- * ```
- */
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      label,
-      error,
-      helperText,
-      startIcon,
-      endIcon,
-      fullWidth = true,
-      className,
-      id,
-      required,
-      disabled,
-      type = 'text',
-      ...props
-    },
-    ref
-  ) => {
-    // Generate unique ID if not provided
-    const inputId = id || `input-${label?.toLowerCase().replace(/\s+/g, '-')}`;
-    const errorId = `${inputId}-error`;
-    const helperId = `${inputId}-helper`;
-
-    // Base input styles (Dark Theme)
-    const inputStyles = cn(
-      'px-4 py-3 rounded-md border',
-      'text-base text-gray-900 placeholder:text-gray-500',
-      'bg-white',
-      'transition-colors duration-200',
-      'focus:outline-none focus:ring-2',
-      'disabled:bg-white disabled:cursor-not-allowed disabled:text-gray-500',
-      // Add padding for icons
-      startIcon && 'pl-10',
-      endIcon && 'pr-10',
-      // Error state styling
-      error
-        ? 'border-error-500 focus:border-error-500 focus:ring-error-500'
-        : 'border-gray-300 focus:border-primary-600 focus:ring-primary-600 focus:ring-opacity-50',
-      fullWidth ? 'w-full' : 'w-auto',
-      className
-    );
-
+  ({ 
+    label, 
+    error, 
+    helperText, 
+    leftIcon, 
+    rightIcon, 
+    fullWidth = false,
+    className = '',
+    id,
+    ...props 
+  }, ref) => {
+    const inputId = id || label?.toLowerCase().replace(/\s+/g, '-');
+    
     return (
-      <div className={cn('flex flex-col gap-1.5', fullWidth && 'w-full')}>
-        {/* Label */}
+      <div className={`${fullWidth ? 'w-full' : ''}`}>
         {label && (
-          <label
-            htmlFor={inputId}
-            className="text-sm font-medium text-gray-900"
+          <label 
+            htmlFor={inputId} 
+            className="block text-sm font-semibold text-brand-black mb-2"
           >
             {label}
-            {required && (
-              <span className="text-error-500 ml-1" aria-label="required">
-                *
-              </span>
-            )}
+            {props.required && <span className="text-brand-orange ml-1">*</span>}
           </label>
         )}
-
-        {/* Input wrapper for icons */}
+        
         <div className="relative">
-          {/* Start icon */}
-          {startIcon && (
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
-              {startIcon}
+          {leftIcon && (
+            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+              {leftIcon}
             </div>
           )}
-
-          {/* Input field */}
+          
           <input
             ref={ref}
             id={inputId}
-            type={type}
-            className={inputStyles}
-            disabled={disabled}
-            required={required}
-            aria-invalid={!!error}
-            aria-describedby={
-              error ? errorId : helperText ? helperId : undefined
-            }
+            className={`
+              w-full px-4 py-2.5 
+              ${leftIcon ? 'pl-10' : ''}
+              ${rightIcon ? 'pr-10' : ''}
+              border ${error ? 'border-brand-orange' : 'border-gray-300'}
+              rounded-md
+              focus:outline-none focus:ring-2 
+              ${error ? 'focus:ring-brand-orange/50' : 'focus:ring-brand-orange'}
+              focus:border-transparent
+              font-montserrat
+              placeholder:text-gray-400
+              transition-all duration-200
+              disabled:bg-gray-100 disabled:cursor-not-allowed
+              ${className}
+            `}
             {...props}
           />
-
-          {/* End icon */}
-          {endIcon && (
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
-              {endIcon}
+          
+          {rightIcon && (
+            <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+              {rightIcon}
             </div>
           )}
         </div>
-
-        {/* Error message */}
+        
         {error && (
-          <p
-            id={errorId}
-            className="text-sm text-error-500 flex items-center gap-1"
-            role="alert"
-          >
-            <svg
-              className="w-4 h-4 flex-shrink-0"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              aria-hidden="true"
-            >
-              <path
-                fillRule="evenodd"
-                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                clipRule="evenodd"
-              />
+          <p className="text-sm text-brand-orange mt-1 flex items-center gap-1">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
             </svg>
             {error}
           </p>
         )}
-
-        {/* Helper text (only shown when no error) */}
-        {!error && helperText && (
-          <p id={helperId} className="text-sm text-gray-600">
+        
+        {helperText && !error && (
+          <p className="text-sm text-brand-black/60 mt-1">
             {helperText}
           </p>
         )}
@@ -187,3 +102,341 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 Input.displayName = 'Input';
+
+// ============================================
+// TEXTAREA COMPONENT
+// ============================================
+
+interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label?: string;
+  error?: string;
+  helperText?: string;
+  fullWidth?: boolean;
+}
+
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ 
+    label, 
+    error, 
+    helperText, 
+    fullWidth = false,
+    className = '',
+    id,
+    rows = 4,
+    ...props 
+  }, ref) => {
+    const textareaId = id || label?.toLowerCase().replace(/\s+/g, '-');
+    
+    return (
+      <div className={`${fullWidth ? 'w-full' : ''}`}>
+        {label && (
+          <label 
+            htmlFor={textareaId} 
+            className="block text-sm font-semibold text-brand-black mb-2"
+          >
+            {label}
+            {props.required && <span className="text-brand-orange ml-1">*</span>}
+          </label>
+        )}
+        
+        <textarea
+          ref={ref}
+          id={textareaId}
+          rows={rows}
+          className={`
+            w-full px-4 py-2.5
+            border ${error ? 'border-brand-orange' : 'border-gray-300'}
+            rounded-md
+            focus:outline-none focus:ring-2 
+            ${error ? 'focus:ring-brand-orange/50' : 'focus:ring-brand-orange'}
+            focus:border-transparent
+            font-montserrat
+            placeholder:text-gray-400
+            transition-all duration-200
+            disabled:bg-gray-100 disabled:cursor-not-allowed
+            resize-y
+            ${className}
+          `}
+          {...props}
+        />
+        
+        {error && (
+          <p className="text-sm text-brand-orange mt-1 flex items-center gap-1">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
+            {error}
+          </p>
+        )}
+        
+        {helperText && !error && (
+          <p className="text-sm text-brand-black/60 mt-1">
+            {helperText}
+          </p>
+        )}
+      </div>
+    );
+  }
+);
+
+Textarea.displayName = 'Textarea';
+
+// ============================================
+// SELECT COMPONENT
+// ============================================
+
+interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  label?: string;
+  error?: string;
+  helperText?: string;
+  options: { value: string; label: string }[];
+  fullWidth?: boolean;
+}
+
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+  ({ 
+    label, 
+    error, 
+    helperText, 
+    options,
+    fullWidth = false,
+    className = '',
+    id,
+    ...props 
+  }, ref) => {
+    const selectId = id || label?.toLowerCase().replace(/\s+/g, '-');
+    
+    return (
+      <div className={`${fullWidth ? 'w-full' : ''}`}>
+        {label && (
+          <label 
+            htmlFor={selectId} 
+            className="block text-sm font-semibold text-brand-black mb-2"
+          >
+            {label}
+            {props.required && <span className="text-brand-orange ml-1">*</span>}
+          </label>
+        )}
+        
+        <div className="relative">
+          <select
+            ref={ref}
+            id={selectId}
+            className={`
+              w-full px-4 py-2.5 pr-10
+              border ${error ? 'border-brand-orange' : 'border-gray-300'}
+              rounded-md
+              focus:outline-none focus:ring-2 
+              ${error ? 'focus:ring-brand-orange/50' : 'focus:ring-brand-orange'}
+              focus:border-transparent
+              font-montserrat
+              transition-all duration-200
+              disabled:bg-gray-100 disabled:cursor-not-allowed
+              appearance-none
+              bg-white
+              cursor-pointer
+              ${className}
+            `}
+            {...props}
+          >
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+          
+          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none text-gray-400">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+        
+        {error && (
+          <p className="text-sm text-brand-orange mt-1 flex items-center gap-1">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
+            {error}
+          </p>
+        )}
+        
+        {helperText && !error && (
+          <p className="text-sm text-brand-black/60 mt-1">
+            {helperText}
+          </p>
+        )}
+      </div>
+    );
+  }
+);
+
+Select.displayName = 'Select';
+
+// ============================================
+// CHECKBOX COMPONENT
+// ============================================
+
+interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+  label: string;
+  error?: string;
+}
+
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+  ({ label, error, className = '', id, ...props }, ref) => {
+    const checkboxId = id || label.toLowerCase().replace(/\s+/g, '-');
+    
+    return (
+      <div>
+        <div className="flex items-start gap-3">
+          <input
+            ref={ref}
+            type="checkbox"
+            id={checkboxId}
+            className={`
+              w-5 h-5 mt-0.5
+              border-2 border-gray-300
+              rounded
+              text-brand-orange
+              focus:ring-2 focus:ring-brand-orange focus:ring-offset-2
+              transition-all duration-200
+              cursor-pointer
+              disabled:cursor-not-allowed disabled:opacity-50
+              ${className}
+            `}
+            {...props}
+          />
+          <label 
+            htmlFor={checkboxId} 
+            className="text-sm text-brand-black cursor-pointer select-none"
+          >
+            {label}
+            {props.required && <span className="text-brand-orange ml-1">*</span>}
+          </label>
+        </div>
+        
+        {error && (
+          <p className="text-sm text-brand-orange mt-1 ml-8 flex items-center gap-1">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
+            {error}
+          </p>
+        )}
+      </div>
+    );
+  }
+);
+
+Checkbox.displayName = 'Checkbox';
+
+// ============================================
+// RADIO COMPONENT
+// ============================================
+
+interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+  label: string;
+  error?: string;
+}
+
+export const Radio = forwardRef<HTMLInputElement, RadioProps>(
+  ({ label, error, className = '', id, ...props }, ref) => {
+    const radioId = id || `${props.name}-${props.value}`;
+    
+    return (
+      <div>
+        <div className="flex items-start gap-3">
+          <input
+            ref={ref}
+            type="radio"
+            id={radioId}
+            className={`
+              w-5 h-5 mt-0.5
+              border-2 border-gray-300
+              text-brand-orange
+              focus:ring-2 focus:ring-brand-orange focus:ring-offset-2
+              transition-all duration-200
+              cursor-pointer
+              disabled:cursor-not-allowed disabled:opacity-50
+              ${className}
+            `}
+            {...props}
+          />
+          <label 
+            htmlFor={radioId} 
+            className="text-sm text-brand-black cursor-pointer select-none"
+          >
+            {label}
+            {props.required && <span className="text-brand-orange ml-1">*</span>}
+          </label>
+        </div>
+        
+        {error && (
+          <p className="text-sm text-brand-orange mt-1 ml-8">
+            {error}
+          </p>
+        )}
+      </div>
+    );
+  }
+);
+
+Radio.displayName = 'Radio';
+
+// ============================================
+// FORM COMPONENT
+// ============================================
+
+interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
+  children: React.ReactNode;
+}
+
+export function Form({ children, className = '', ...props }: FormProps) {
+  return (
+    <form className={`space-y-6 ${className}`} {...props}>
+      {children}
+    </form>
+  );
+}
+
+// ============================================
+// FORM GROUP COMPONENT
+// ============================================
+
+interface FormGroupProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function FormGroup({ children, className = '' }: FormGroupProps) {
+  return (
+    <div className={`space-y-4 ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+// ============================================
+// FORM ROW COMPONENT (for side-by-side inputs)
+// ============================================
+
+interface FormRowProps {
+  children: React.ReactNode;
+  cols?: 2 | 3 | 4;
+  className?: string;
+}
+
+export function FormRow({ children, cols = 2, className = '' }: FormRowProps) {
+  const gridCols = {
+    2: 'grid-cols-1 md:grid-cols-2',
+    3: 'grid-cols-1 md:grid-cols-3',
+    4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4',
+  };
+
+  return (
+    <div className={`grid ${gridCols[cols]} gap-4 ${className}`}>
+      {children}
+    </div>
+  );
+}

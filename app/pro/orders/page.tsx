@@ -29,12 +29,15 @@ export default function ProOrdersPage() {
   const [statusFilter, setStatusFilter] = useState<OrderStatus | 'all'>('all');
 
   // Get orders for logged-in pro
-  const allOrders = getOrdersByPro(LOGGED_IN_PRO_ID);
+  const allOrders = getOrdersByPro(LOGGED_IN_PRO_ID) || [];
 
   // Filter orders by status
   const filteredOrders = useMemo(() => {
-    if (statusFilter === 'all') return allOrders;
-    return allOrders.filter((order) => order.status === statusFilter);
+    if (!allOrders || allOrders.length === 0) return [];
+    // Filter out any null/undefined orders and apply status filter
+    const validOrders = allOrders.filter((order) => order != null);
+    if (statusFilter === 'all') return validOrders;
+    return validOrders.filter((order) => order.status === statusFilter);
   }, [allOrders, statusFilter]);
 
   // Table columns
@@ -44,7 +47,7 @@ export default function ProOrdersPage() {
       label: 'Order ID',
       sortable: true,
       render: (order: Order) => (
-        <div className="font-medium text-gray-900">{order.id}</div>
+        <div className="font-medium text-brand-black">{order.id}</div>
       ),
     },
     {
@@ -52,7 +55,7 @@ export default function ProOrdersPage() {
       label: 'Date',
       sortable: true,
       render: (order: Order) => (
-        <div className="text-sm text-gray-900">
+        <div className="text-sm text-brand-black">
           {formatDate(order.createdAt)}
         </div>
       ),
@@ -60,19 +63,22 @@ export default function ProOrdersPage() {
     {
       key: 'items',
       label: 'Items',
-      render: (order: Order) => (
-        <div className="text-sm text-gray-600">
-          {order.items.length} item{order.items.length !== 1 ? 's' : ''}
-        </div>
-      ),
+      render: (order: Order) => {
+        const itemCount = order?.items?.length || 0;
+        return (
+          <div className="text-sm text-brand-black/70">
+            {itemCount} item{itemCount !== 1 ? 's' : ''}
+          </div>
+        );
+      },
     },
     {
       key: 'total',
       label: 'Total',
       sortable: true,
       render: (order: Order) => (
-        <div className="text-sm font-medium text-gray-900">
-          {formatCurrency(order.pricing.total)}
+        <div className="text-sm font-medium text-brand-orange">
+          {formatCurrency(order?.pricing?.total || 0)}
         </div>
       ),
     },
@@ -81,7 +87,13 @@ export default function ProOrdersPage() {
       label: 'Status',
       sortable: true,
       render: (order: Order) => {
+        if (!order || !order.status) {
+          return <Badge variant="warning" label="Unknown" />;
+        }
         const statusConfig = ORDER_STATUS_COLORS[order.status];
+        if (!statusConfig) {
+          return <Badge variant="warning" label={order.status} />;
+        }
         return (
           <Badge
             variant={
@@ -105,10 +117,11 @@ export default function ProOrdersPage() {
       label: '',
       render: (order: Order) => (
         <div className="flex justify-end">
-          <Link href={`/pro/orders/${order.id}`}>
+          <Link href={`/pro/orders/${order?.id || 'unknown'}`}>
             <Button
               variant="outline"
               size="sm"
+              disabled={!order?.id}
             >
               View Details
             </Button>
@@ -120,6 +133,15 @@ export default function ProOrdersPage() {
 
   // Order summary stats
   const stats = useMemo(() => {
+    if (!allOrders || allOrders.length === 0) {
+      return {
+        totalOrders: 0,
+        totalRevenue: 0,
+        pendingOrders: 0,
+        deliveredOrders: 0,
+      };
+    }
+
     const totalOrders = allOrders.length;
     const totalRevenue = allOrders.reduce((sum, order) => sum + order.pricing.total, 0);
     const pendingOrders = allOrders.filter(
@@ -153,29 +175,29 @@ export default function ProOrdersPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="text-sm font-medium text-gray-500 mb-1">Total Orders</div>
-            <div className="text-3xl font-bold text-gray-900">{stats.totalOrders}</div>
+          <div className="bg-white rounded-lg shadow-brand-md p-6 border border-brand-orange/20">
+            <div className="text-sm font-medium text-brand-black/60 mb-1">Total Orders</div>
+            <div className="text-3xl font-bold text-brand-black">{stats.totalOrders}</div>
           </div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="text-sm font-medium text-gray-500 mb-1">Total Spent</div>
-            <div className="text-3xl font-bold text-gray-900">
+          <div className="bg-white rounded-lg shadow-brand-md p-6 border border-brand-orange/20">
+            <div className="text-sm font-medium text-brand-black/60 mb-1">Total Spent</div>
+            <div className="text-3xl font-bold text-brand-orange">
               {formatCurrency(stats.totalRevenue)}
             </div>
           </div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="text-sm font-medium text-gray-500 mb-1">Pending</div>
-            <div className="text-3xl font-bold text-yellow-600">{stats.pendingOrders}</div>
+          <div className="bg-white rounded-lg shadow-brand-md p-6 border border-brand-orange/20">
+            <div className="text-sm font-medium text-brand-black/60 mb-1">Pending</div>
+            <div className="text-3xl font-bold text-accent-gold">{stats.pendingOrders}</div>
           </div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="text-sm font-medium text-gray-500 mb-1">Delivered</div>
-            <div className="text-3xl font-bold text-green-600">{stats.deliveredOrders}</div>
+          <div className="bg-white rounded-lg shadow-brand-md p-6 border border-brand-orange/20">
+            <div className="text-sm font-medium text-brand-black/60 mb-1">Delivered</div>
+            <div className="text-3xl font-bold text-accent-green">{stats.deliveredOrders}</div>
           </div>
         </div>
 
         {/* Status Filter */}
         <div className="mb-6 flex items-center gap-2">
-          <span className="text-sm font-medium text-gray-600">Filter by status:</span>
+          <span className="text-sm font-medium text-brand-black/70">Filter by status:</span>
           <div className="flex gap-2 flex-wrap">
             {STATUS_FILTERS.map((filter) => (
               <button
@@ -185,8 +207,8 @@ export default function ProOrdersPage() {
                   px-4 py-2 rounded-md text-sm font-medium transition-colors
                   ${
                     statusFilter === filter.value
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
+                      ? 'bg-brand-orange text-white shadow-brand-sm'
+                      : 'bg-white text-brand-black border border-gray-300 hover:bg-brand-orange/10 hover:border-brand-orange/40'
                   }
                 `}
               >

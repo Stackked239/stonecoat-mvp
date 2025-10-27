@@ -1,0 +1,43 @@
+{
+  "login": {
+    "success": true,
+    "errors": []
+  },
+  "dashboard": {
+    "success": false,
+    "errors": [
+      "page.waitForSelector: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('text=Performance Overview') to be visible\u001b[22m\n"
+    ]
+  },
+  "quotes": {
+    "success": true,
+    "errors": []
+  },
+  "jobs": {
+    "success": true,
+    "errors": []
+  },
+  "inventory": {
+    "success": true,
+    "errors": []
+  },
+  "orders": {
+    "success": true,
+    "errors": []
+  },
+  "consoleErrors": [
+    {
+      "text": "React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element. startIcon starticon",
+      "location": {
+        "url": "http://localhost:3002/_next/static/chunks/node_modules_next_dist_b0daae9a._.js",
+        "lineNumber": 2359,
+        "columnNumber": 31
+      },
+      "timestamp": "2025-10-22T21:34:28.394Z"
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 1
+  }
+}

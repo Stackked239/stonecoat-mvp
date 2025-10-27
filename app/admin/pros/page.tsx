@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Admin Contractors Management Page
  * List and manage all certified contractors on the platform
@@ -9,6 +11,7 @@
 import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { PageHeader } from '@/components/shared/PageHeader';
+import { Card } from '@/components/shared/Card';
 import { DataTable, DataTableColumn } from '@/components/shared/DataTable';
 import { Badge } from '@/components/shared/Badge';
 import { Button } from '@/components/shared/Button';
@@ -229,143 +232,50 @@ export default function AdminContractorsPage() {
 
       {/* Statistics Cards */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-6">
-        <div className="bg-white overflow-hidden shadow rounded-lg">
-          <div className="p-5">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="rounded-md bg-blue-500 p-3">
-                  <svg
-                    className="h-6 w-6 text-gray-900"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
-                    Active Contractors
-                  </dt>
-                  <dd className="text-2xl font-bold text-gray-900">{stats.activePros}</dd>
-                </dl>
-              </div>
-            </div>
+        <Card>
+          <div className="flex flex-col gap-2">
+            <p className="text-sm font-medium text-gray-600">Active Contractors</p>
+            <p className="text-3xl font-bold text-brand-black">{stats.activePros}</p>
+            <p className="text-xs text-gray-500">Certified pros</p>
           </div>
-        </div>
+        </Card>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg">
-          <div className="p-5">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="rounded-md bg-purple-500 p-3">
-                  <svg
-                    className="h-6 w-6 text-gray-900"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
-                    Master Certified
-                  </dt>
-                  <dd className="text-2xl font-bold text-gray-900">{stats.masterPros}</dd>
-                </dl>
-              </div>
-            </div>
+        <Card>
+          <div className="flex flex-col gap-2">
+            <p className="text-sm font-medium text-gray-600">Master Certified</p>
+            <p className="text-3xl font-bold text-brand-orange">{stats.masterPros}</p>
+            <p className="text-xs text-gray-500">Elite tier</p>
           </div>
-        </div>
+        </Card>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg">
-          <div className="p-5">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="rounded-md bg-green-500 p-3">
-                  <svg
-                    className="h-6 w-6 text-gray-900"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
-                    Total Revenue
-                  </dt>
-                  <dd className="text-2xl font-bold text-gray-900">
-                    {formatCurrency(stats.totalRevenue)}
-                  </dd>
-                </dl>
-              </div>
-            </div>
+        <Card>
+          <div className="flex flex-col gap-2">
+            <p className="text-sm font-medium text-gray-600">Total Revenue</p>
+            <p className="text-3xl font-bold text-brand-black">{formatCurrency(stats.totalRevenue)}</p>
+            <p className="text-xs text-gray-500">Network lifetime</p>
           </div>
-        </div>
+        </Card>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg">
-          <div className="p-5">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="rounded-md bg-yellow-500 p-3">
-                  <StarIconSolid className="h-6 w-6 text-gray-900" />
-                </div>
-              </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
-                    Avg Rating
-                  </dt>
-                  <dd className="text-2xl font-bold text-gray-900">
-                    {stats.avgRating.toFixed(2)}
-                  </dd>
-                </dl>
-              </div>
-            </div>
+        <Card>
+          <div className="flex flex-col gap-2">
+            <p className="text-sm font-medium text-gray-600">Avg Rating</p>
+            <p className="text-3xl font-bold text-accent-gold">{stats.avgRating.toFixed(2)}</p>
+            <p className="text-xs text-gray-500">⭐⭐⭐⭐⭐</p>
           </div>
-        </div>
+        </Card>
       </div>
 
       {/* Filters */}
-      <div className="bg-white shadow rounded-lg p-4 mb-6">
+      <Card className="mb-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex-1 max-w-md">
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" />
-              </div>
-              <Input
-                type="text"
-                placeholder="Search by business name or email..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-              />
-            </div>
+            <Input
+              type="text"
+              placeholder="Search by business name or email..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              startIcon={<MagnifyingGlassIcon className="h-5 w-5" />}
+            />
           </div>
 
           <div className="flex items-center gap-3">
@@ -373,7 +283,7 @@ export default function AdminContractorsPage() {
             <select
               value={certificationFilter}
               onChange={(e) => setCertificationFilter(e.target.value as 'all' | 'certified' | 'master')}
-              className="block rounded-md border-gray-200 shadow-sm focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
+              className="block rounded-md border-gray-200 shadow-sm focus:border-brand-orange focus:ring-brand-orange sm:text-sm"
             >
               <option value="all">All Certifications</option>
               <option value="certified">Certified</option>
@@ -383,7 +293,7 @@ export default function AdminContractorsPage() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'revenue' | 'rating' | 'winRate')}
-              className="block rounded-md border-gray-200 shadow-sm focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
+              className="block rounded-md border-gray-200 shadow-sm focus:border-brand-orange focus:ring-brand-orange sm:text-sm"
             >
               <option value="revenue">Sort by Revenue</option>
               <option value="rating">Sort by Rating</option>
@@ -391,10 +301,10 @@ export default function AdminContractorsPage() {
             </select>
           </div>
         </div>
-      </div>
+      </Card>
 
       {/* Contractors Table */}
-      <div className="bg-white shadow rounded-lg overflow-hidden">
+      <Card padding="none">
         <DataTable
           columns={columns}
           data={filteredPros}
@@ -412,7 +322,7 @@ export default function AdminContractorsPage() {
           }}
           sortable
         />
-      </div>
+      </Card>
     </div>
   );
 }

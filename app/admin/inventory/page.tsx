@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Admin Inventory Management Page
  * Stock management dashboard with filters, search, and stock alerts

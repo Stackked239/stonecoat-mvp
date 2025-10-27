@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Pro Portal - Jobs Pipeline Page
  * Kanban-style job tracking by status with filtering and stats
@@ -8,7 +10,7 @@
 
 import { useState, useMemo } from 'react';
 import { Card, CardHeader, CardTitle } from '@/components/shared/Card';
-import { Badge } from '@/components/shared/Badge';
+import { StatusBadge } from '@/components/shared/Badge';
 import { Button } from '@/components/shared/Button';
 import { mockJobs } from '@/lib/data/mockJobs';
 import { PROJECT_TYPE_CONFIG } from '@/lib/utils/constants';
@@ -31,7 +33,10 @@ export default function JobsPage() {
 
   // Filter jobs by logged-in pro
   const proJobs = useMemo(
-    () => mockJobs.filter((job) => job.proId === LOGGED_IN_PRO_ID),
+    () => {
+      if (!mockJobs || !Array.isArray(mockJobs)) return [];
+      return mockJobs.filter((job) => job.proId === LOGGED_IN_PRO_ID);
+    },
     []
   );
 
@@ -111,45 +116,45 @@ export default function JobsPage() {
 
   // Kanban columns configuration - show main job pipeline statuses
   const kanbanColumns: { status: JobStatus; label: string; color: string }[] = [
-    { status: 'quote-sent', label: 'Quote Sent', color: 'border-blue-200 bg-blue-50' },
-    { status: 'materials-ordered', label: 'Materials Ordered', color: 'border-purple-200 bg-purple-50' },
-    { status: 'scheduled', label: 'Scheduled', color: 'border-cyan-200 bg-cyan-50' },
-    { status: 'in-progress', label: 'In Progress', color: 'border-yellow-200 bg-yellow-50' },
-    { status: 'completed', label: 'Completed', color: 'border-green-200 bg-green-50' },
+    { status: 'quote-sent', label: 'Quote Sent', color: 'border-accent-blue bg-accent-blue/10' },
+    { status: 'materials-ordered', label: 'Materials Ordered', color: 'border-brand-orange bg-brand-orange/10' },
+    { status: 'scheduled', label: 'Scheduled', color: 'border-accent-gold bg-accent-gold/10' },
+    { status: 'in-progress', label: 'In Progress', color: 'border-brand-orange bg-brand-orange/20' },
+    { status: 'completed', label: 'Completed', color: 'border-accent-green bg-accent-green/10' },
   ];
 
   // Cancelled jobs displayed separately
   const cancelledJobs = jobsByStatus['cancelled'];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-white p-6">
       <div className="mx-auto max-w-7xl">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="mb-2 text-3xl font-bold text-gray-900">Job Pipeline</h1>
-          <p className="text-gray-600">
+          <h1 className="mb-2 text-3xl font-bold text-brand-black">Job Pipeline</h1>
+          <p className="text-brand-black/70">
             Track your jobs from scheduling to completion
           </p>
         </div>
 
         {/* Summary Stats */}
         <div className="mb-8 grid gap-6 sm:grid-cols-3">
-          <Card padding="md" variant="outlined">
+          <Card>
             <div>
-              <p className="text-sm font-medium text-gray-600">Total Active Jobs</p>
-              <p className="mt-2 text-3xl font-bold text-gray-900">{stats.totalActive}</p>
+              <p className="text-sm font-medium text-brand-black/60">Total Active Jobs</p>
+              <p className="mt-2 text-3xl font-bold text-brand-black">{stats.totalActive}</p>
             </div>
           </Card>
-          <Card padding="md" variant="outlined">
+          <Card>
             <div>
-              <p className="text-sm font-medium text-gray-600">Scheduled This Week</p>
-              <p className="mt-2 text-3xl font-bold text-cyan-600">{stats.scheduledThisWeek}</p>
+              <p className="text-sm font-medium text-brand-black/60">Scheduled This Week</p>
+              <p className="mt-2 text-3xl font-bold text-accent-blue">{stats.scheduledThisWeek}</p>
             </div>
           </Card>
-          <Card padding="md" variant="outlined">
+          <Card>
             <div>
-              <p className="text-sm font-medium text-gray-600">Completed This Month</p>
-              <p className="mt-2 text-3xl font-bold text-green-600">{stats.completedThisMonth}</p>
+              <p className="text-sm font-medium text-brand-black/60">Completed This Month</p>
+              <p className="mt-2 text-3xl font-bold text-accent-green">{stats.completedThisMonth}</p>
             </div>
           </Card>
         </div>
@@ -196,10 +201,10 @@ export default function JobsPage() {
                   className={`mb-4 rounded-t-lg border-2 ${column.color} p-4`}
                 >
                   <div className="flex items-center justify-between">
-                    <h2 className="text-lg font-semibold text-gray-900">
+                    <h2 className="text-lg font-semibold text-brand-black">
                       {column.label}
                     </h2>
-                    <span className="rounded-full bg-white px-2.5 py-0.5 text-sm font-medium text-gray-600">
+                    <span className="rounded-full bg-white px-2.5 py-0.5 text-sm font-medium text-brand-black shadow-sm">
                       {jobsByStatus[column.status].length}
                     </span>
                   </div>
@@ -276,31 +281,31 @@ function JobCard({ job }: { job: Job }) {
   const projectTypeConfig = PROJECT_TYPE_CONFIG[job.project.type];
 
   return (
-    <Card hoverable padding="md" variant="outlined">
+    <Card hover padding="md">
       <div className="space-y-3">
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>
-            <h3 className="font-semibold text-gray-900">{job.customer.name}</h3>
-            <p className="text-sm text-gray-600">{projectTypeConfig.label}</p>
+            <h3 className="font-semibold text-brand-black">{job.customer.name}</h3>
+            <p className="text-sm text-brand-black/70">{projectTypeConfig.label}</p>
           </div>
-          <Badge jobStatus={job.status} size="sm" />
+          <StatusBadge status={job.status} />
         </div>
 
         {/* Project Details */}
         <div className="space-y-2 border-t border-gray-100 pt-3">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
+          <div className="flex items-center gap-2 text-sm text-brand-black/70">
             <Square3Stack3DIcon className="h-4 w-4" />
             <span>{job.project.squareFootage.toLocaleString()} sq ft</span>
           </div>
-          <div className="flex items-center gap-2 text-sm text-gray-600">
+          <div className="flex items-center gap-2 text-sm text-brand-black/70">
             <MapPinIcon className="h-4 w-4" />
             <span>
               {job.customer.address.city}, {job.customer.address.state}
             </span>
           </div>
           {(job.scheduledDate || job.completionDate) && (
-            <div className="flex items-center gap-2 text-sm text-gray-600">
+            <div className="flex items-center gap-2 text-sm text-brand-black/70">
               <CalendarIcon className="h-4 w-4" />
               <span>
                 {job.status === 'completed' && job.completionDate
@@ -316,7 +321,7 @@ function JobCard({ job }: { job: Job }) {
         {/* Notes */}
         {job.notes && (
           <div className="border-t border-gray-100 pt-3">
-            <p className="text-xs text-gray-500 line-clamp-2">{job.notes}</p>
+            <p className="text-xs text-brand-black/60 line-clamp-2">{job.notes}</p>
           </div>
         )}
 

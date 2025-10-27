@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Pro Portal - Quote Detail Page
  * Displays detailed view of a single quote with all information

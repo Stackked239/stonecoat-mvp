@@ -50,8 +50,12 @@ export default function ProInventoryPage() {
   // Filter products
   const filteredProducts = useMemo(() => {
     let products = selectedCategory === 'all'
-      ? mockInventory
-      : getProductsByCategory(selectedCategory);
+      ? (mockInventory || [])
+      : (getProductsByCategory(selectedCategory) || []);
+
+    if (!products || !Array.isArray(products)) {
+      return [];
+    }
 
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
@@ -122,7 +126,7 @@ export default function ProInventoryPage() {
         </div>
 
         {/* Category Tabs */}
-        <div className="mb-8 border-b border-gray-200">
+        <div className="mb-8 border-b border-brand-orange/20">
           <nav className="-mb-px flex space-x-8 overflow-x-auto">
             {CATEGORIES.map((category) => (
               <button
@@ -132,8 +136,8 @@ export default function ProInventoryPage() {
                   whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors
                   ${
                     selectedCategory === category.value
-                      ? 'border-blue-600 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-600 hover:border-gray-200'
+                      ? 'border-brand-orange text-brand-orange'
+                      : 'border-transparent text-brand-black/60 hover:text-brand-black hover:border-brand-orange/40'
                   }
                 `}
               >
@@ -144,7 +148,7 @@ export default function ProInventoryPage() {
         </div>
 
         {/* Product Count */}
-        <div className="mb-4 text-sm text-gray-600">
+        <div className="mb-4 text-sm text-brand-black/60">
           Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
         </div>
 
@@ -167,14 +171,14 @@ export default function ProInventoryPage() {
                     <div className="mb-4">
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                          <h3 className="text-lg font-semibold text-brand-black mb-1">
                             {product.name}
                           </h3>
-                          <p className="text-sm text-gray-500">{product.sku}</p>
+                          <p className="text-sm text-brand-black/50">{product.sku}</p>
                         </div>
                         <Badge variant={stockStatus.variant} label={stockStatus.label} />
                       </div>
-                      <p className="text-sm text-gray-600 line-clamp-2">
+                      <p className="text-sm text-brand-black/70 line-clamp-2">
                         {product.description}
                       </p>
                     </div>
@@ -182,8 +186,8 @@ export default function ProInventoryPage() {
                     {/* Product Specs */}
                     {product.specs.coverage && (
                       <div className="mb-4 text-sm">
-                        <span className="text-gray-500">Coverage:</span>{' '}
-                        <span className="text-gray-900">{product.specs.coverage}</span>
+                        <span className="text-brand-black/60">Coverage:</span>{' '}
+                        <span className="text-brand-black">{product.specs.coverage}</span>
                       </div>
                     )}
 
@@ -210,21 +214,21 @@ export default function ProInventoryPage() {
                     <div className="flex-1" />
 
                     {/* Pricing & Action */}
-                    <div className="border-t border-gray-200 pt-4 mt-4">
+                    <div className="border-t border-brand-orange/20 pt-4 mt-4">
                       <div className="flex items-center justify-between mb-3">
                         <div>
-                          <div className="text-2xl font-bold text-gray-900">
+                          <div className="text-2xl font-bold text-brand-orange">
                             {formatCurrency(product.proCost)}
                           </div>
-                          <div className="text-xs text-gray-500">
+                          <div className="text-xs text-brand-black/50">
                             per {product.unit}
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-sm text-gray-500 line-through">
+                          <div className="text-sm text-brand-black/50 line-through">
                             {formatCurrency(product.retailPrice)}
                           </div>
-                          <div className="text-xs text-green-600 font-medium">
+                          <div className="text-xs text-accent-green font-medium">
                             Pro Price
                           </div>
                         </div>

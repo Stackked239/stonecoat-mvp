@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Admin Dashboard Page
  * Master oversight dashboard with metrics, charts, and recent activity
@@ -14,22 +16,20 @@
 
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { PageHeader } from '@/components/shared/PageHeader';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/shared/Card';
+import { Card, CardHeader, CardTitle, CardContent, StatCard } from '@/components/shared/Card';
 import { Badge } from '@/components/shared/Badge';
 import { Button } from '@/components/shared/Button';
 import { mockQuotes } from '@/lib/data/mockQuotes';
 import { mockOrders, getRecentOrders } from '@/lib/data/mockOrders';
 import { mockPros } from '@/lib/data/mockPros';
+import { colors } from '@/lib/design-tokens';
 import Link from 'next/link';
 import {
   CurrencyDollarIcon,
   DocumentTextIcon,
   UserGroupIcon,
-  StarIcon,
-  ArrowTrendingUpIcon,
-  ArrowTrendingDownIcon
 } from '@heroicons/react/24/outline';
 import {
   LineChart,
@@ -110,10 +110,10 @@ export default function AdminDashboardPage() {
     });
 
     return [
-      { name: 'Requested', value: statusCounts.requested, color: '#3B82F6' },
-      { name: 'Sent', value: statusCounts.sent, color: '#8B5CF6' },
-      { name: 'Accepted', value: statusCounts.accepted, color: '#10B981' },
-      { name: 'Declined', value: statusCounts.declined, color: '#EF4444' },
+      { name: 'Requested', value: statusCounts.requested, color: colors.accent.blue },
+      { name: 'Sent', value: statusCounts.sent, color: colors.brand.orange },
+      { name: 'Accepted', value: statusCounts.accepted, color: colors.accent.green },
+      { name: 'Declined', value: statusCounts.declined, color: colors.semantic.error },
       { name: 'Expired', value: statusCounts.expired, color: '#6B7280' },
     ];
   }, []);
@@ -184,81 +184,34 @@ export default function AdminDashboardPage() {
 
         {/* Summary Metrics */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {/* Total Revenue */}
-          <Card variant="default" padding="md">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600 mb-1">Total Revenue</p>
-                <p className="text-3xl font-bold text-gray-900">{formatCurrency(metrics.totalRevenue)}</p>
-                <div className="flex items-center mt-2 text-sm text-green-600">
-                  <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
-                  <span>+12.5% from last month</span>
-                </div>
-              </div>
-              <div className="p-3 bg-green-100 rounded-full">
-                <CurrencyDollarIcon className="w-8 h-8 text-green-600" />
-              </div>
-            </div>
-          </Card>
-
-          {/* Total Quotes */}
-          <Card variant="default" padding="md">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600 mb-1">Total Quotes</p>
-                <p className="text-3xl font-bold text-gray-900">{metrics.totalQuotes}</p>
-                <div className="flex items-center mt-2 text-sm text-blue-600">
-                  <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
-                  <span>+8.3% from last month</span>
-                </div>
-              </div>
-              <div className="p-3 bg-blue-100 rounded-full">
-                <DocumentTextIcon className="w-8 h-8 text-blue-600" />
-              </div>
-            </div>
-          </Card>
-
-          {/* Active Contractors */}
-          <Card variant="default" padding="md">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600 mb-1">Active Contractors</p>
-                <p className="text-3xl font-bold text-gray-900">{metrics.activeContractors}</p>
-                <div className="flex items-center mt-2 text-sm text-purple-600">
-                  <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
-                  <span>All active</span>
-                </div>
-              </div>
-              <div className="p-3 bg-purple-100 rounded-full">
-                <UserGroupIcon className="w-8 h-8 text-purple-600" />
-              </div>
-            </div>
-          </Card>
-
-          {/* Customer Satisfaction */}
-          <Card variant="default" padding="md">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600 mb-1">Customer Satisfaction</p>
-                <p className="text-3xl font-bold text-gray-900">{metrics.avgRating.toFixed(1)}</p>
-                <div className="flex items-center mt-2">
-                  {[...Array(5)].map((_, i) => (
-                    <StarIcon
-                      key={i}
-                      className={`w-4 h-4 ${
-                        i < Math.round(metrics.avgRating)
-                          ? 'text-yellow-400 fill-yellow-400'
-                          : 'text-gray-500'
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-              <div className="p-3 bg-yellow-100 rounded-full">
-                <StarIcon className="w-8 h-8 text-yellow-600" />
-              </div>
-            </div>
-          </Card>
+          <StatCard
+            label="Total Revenue"
+            value={formatCurrency(metrics.totalRevenue)}
+            change="+12.5% from last month"
+            trend="up"
+            icon="💰"
+          />
+          <StatCard
+            label="Total Quotes"
+            value={metrics.totalQuotes.toString()}
+            change="+8.3% from last month"
+            trend="up"
+            icon="📝"
+          />
+          <StatCard
+            label="Active Contractors"
+            value={metrics.activeContractors.toString()}
+            change="All active"
+            trend="neutral"
+            icon="👥"
+          />
+          <StatCard
+            label="Customer Satisfaction"
+            value={metrics.avgRating.toFixed(1)}
+            change={`${[...Array(5)].map((_, i) => i < Math.round(metrics.avgRating) ? '⭐' : '☆').join('')}`}
+            trend="up"
+            icon="⭐"
+          />
         </div>
 
         {/* Charts Section */}
@@ -291,9 +244,9 @@ export default function AdminDashboardPage() {
                     <Line
                       type="monotone"
                       dataKey="revenue"
-                      stroke="#10B981"
+                      stroke={colors.accent.green}
                       strokeWidth={3}
-                      dot={{ fill: '#10B981', r: 4 }}
+                      dot={{ fill: colors.accent.green, r: 4 }}
                       activeDot={{ r: 6 }}
                       name="Revenue"
                     />
@@ -317,7 +270,7 @@ export default function AdminDashboardPage() {
                       cx="50%"
                       cy="50%"
                       labelLine={false}
-                      label={(props: any) =>
+                      label={(props: { name: string; percent: number }) =>
                         `${props.name} ${(props.percent * 100).toFixed(0)}%`
                       }
                       outerRadius={100}
@@ -362,7 +315,7 @@ export default function AdminDashboardPage() {
                       formatter={(value: number) => [`$${value.toLocaleString()}`, 'Revenue']}
                       contentStyle={{ backgroundColor: '#fff', border: '1px solid #E5E7EB', borderRadius: '8px' }}
                     />
-                    <Bar dataKey="revenue" fill="#8B5CF6" radius={[0, 8, 8, 0]} />
+                    <Bar dataKey="revenue" fill={colors.brand.orange} radius={[0, 8, 8, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -396,8 +349,8 @@ export default function AdminDashboardPage() {
                       contentStyle={{ backgroundColor: '#fff', border: '1px solid #E5E7EB', borderRadius: '8px' }}
                     />
                     <Legend />
-                    <Bar dataKey="count" fill="#3B82F6" radius={[8, 8, 0, 0]} name="Quotes" />
-                    <Bar dataKey="percentage" fill="#10B981" radius={[8, 8, 0, 0]} name="Conversion %" />
+                    <Bar dataKey="count" fill={colors.accent.blue} radius={[8, 8, 0, 0]} name="Quotes" />
+                    <Bar dataKey="percentage" fill={colors.accent.green} radius={[8, 8, 0, 0]} name="Conversion %" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>

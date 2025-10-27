@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * DataTable Component
  * Advanced table component with sorting, pagination, loading states, and row actions
@@ -371,7 +373,7 @@ export function DataTable<T extends Record<string, any>>({
                       </div>
                     </th>
                   ))}
-                  {actions && actions.length > 0 && (
+                  {actions && Array.isArray(actions) && actions.length > 0 && (
                     <th
                       scope="col"
                       className="px-6 py-3 text-right text-xs font-medium text-gray-600 uppercase tracking-wider"
@@ -403,7 +405,7 @@ export function DataTable<T extends Record<string, any>>({
                           : item[column.key]}
                       </td>
                     ))}
-                    {actions && actions.length > 0 && (
+                    {actions && Array.isArray(actions) && actions.length > 0 && (
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex items-center justify-end gap-2">
                           {actions.map((action, actionIndex) => (

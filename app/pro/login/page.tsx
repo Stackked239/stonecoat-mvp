@@ -48,15 +48,15 @@ export default function ProLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-kraft-paper to-white flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Login Card */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="bg-white rounded-2xl shadow-brand-xl p-8">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 rounded-full mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-orange/10 rounded-full mb-4">
               <svg
-                className="w-8 h-8 text-primary-600"
+                className="w-8 h-8 text-brand-orange"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -69,10 +69,10 @@ export default function ProLoginPage() {
                 />
               </svg>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Pro Portal Login
+            <h1 className="font-bebas text-4xl text-brand-black mb-2">
+              PRO PORTAL LOGIN
             </h1>
-            <p className="text-gray-600">
+            <p className="text-brand-black/70">
               Access your contractor dashboard
             </p>
           </div>
@@ -88,7 +88,7 @@ export default function ProLoginPage() {
               placeholder="you@example.com"
               required
               disabled={isLoading}
-              startIcon={<EnvelopeIcon className="w-5 h-5" />}
+              leftIcon={<EnvelopeIcon className="w-5 h-5" />}
             />
 
             {/* Password Input */}
@@ -100,13 +100,13 @@ export default function ProLoginPage() {
               placeholder="Enter password"
               required
               disabled={isLoading}
-              startIcon={<LockClosedIcon className="w-5 h-5" />}
+              leftIcon={<LockClosedIcon className="w-5 h-5" />}
             />
 
             {/* Error Message */}
             {error && (
-              <div className="bg-error-50 border border-error-200 rounded-lg p-4">
-                <p className="text-sm text-error-700 flex items-start gap-2">
+              <div className="bg-brand-orange/10 border border-brand-orange rounded-lg p-4">
+                <p className="text-sm text-brand-orange flex items-start gap-2">
                   <svg
                     className="w-5 h-5 flex-shrink-0 mt-0.5"
                     fill="currentColor"
@@ -129,18 +129,18 @@ export default function ProLoginPage() {
               variant="primary"
               size="lg"
               fullWidth
-              isLoading={isLoading}
+              loading={isLoading}
             >
               {isLoading ? 'Logging in...' : 'Login'}
             </Button>
           </form>
 
           {/* Demo Credentials Info */}
-          <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-            <p className="text-xs text-gray-600 font-medium mb-2">
+          <div className="mt-6 p-4 bg-kraft-paper rounded-lg border border-gray-200">
+            <p className="text-xs text-brand-black font-medium mb-2">
               Demo Credentials:
             </p>
-            <div className="space-y-1 text-xs text-gray-600">
+            <div className="space-y-1 text-xs text-brand-black/80">
               <p>
                 <span className="font-medium">Email:</span> Any email from mockPros
                 (e.g., mike@tampacoatings.com)
@@ -153,9 +153,9 @@ export default function ProLoginPage() {
         </div>
 
         {/* Footer */}
-        <p className="text-center text-sm text-gray-600 mt-6">
+        <p className="text-center text-sm text-brand-black/70 mt-6">
           Need access?{' '}
-          <a href="mailto:support@stonecoat.com" className="text-primary-600 hover:text-primary-700 font-medium">
+          <a href="mailto:support@stonecoat.com" className="text-brand-orange hover:text-brand-orange/80 font-medium">
             Contact Support
           </a>
         </p>

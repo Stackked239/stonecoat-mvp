@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Admin Quotes Management Page
  * Display all quotes from all contractors with filtering and search
@@ -9,12 +11,13 @@
 import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { PageHeader } from '@/components/shared/PageHeader';
+import { Card } from '@/components/shared/Card';
 import { DataTable, DataTableColumn } from '@/components/shared/DataTable';
 import { Badge } from '@/components/shared/Badge';
 import { Button } from '@/components/shared/Button';
 import { Input } from '@/components/shared/Input';
 import { mockQuotes } from '@/lib/data/mockQuotes';
-import { mockPros, getProById } from '@/lib/data/mockPros';
+import { getProById } from '@/lib/data/mockPros';
 import { formatCurrency, formatDate, formatProjectType } from '@/lib/utils/formatting';
 import { Quote, QuoteStatus } from '@/lib/types';
 import { MagnifyingGlassIcon, FunnelIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
@@ -184,151 +187,50 @@ export default function AdminQuotesPage() {
 
       {/* Statistics Cards */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-6">
-        <div className="bg-white overflow-hidden shadow rounded-lg">
-          <div className="p-5">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="rounded-md bg-blue-500 p-3">
-                  <svg
-                    className="h-6 w-6 text-gray-900"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
-                    Requested
-                  </dt>
-                  <dd className="text-2xl font-bold text-gray-900">{stats.requested}</dd>
-                </dl>
-              </div>
-            </div>
+        <Card>
+          <div className="flex flex-col gap-2">
+            <p className="text-sm font-medium text-gray-600">Requested</p>
+            <p className="text-3xl font-bold text-brand-black">{stats.requested}</p>
+            <p className="text-xs text-gray-500">Pending assignment</p>
           </div>
-        </div>
+        </Card>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg">
-          <div className="p-5">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="rounded-md bg-purple-500 p-3">
-                  <svg
-                    className="h-6 w-6 text-gray-900"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">Sent</dt>
-                  <dd className="text-2xl font-bold text-gray-900">{stats.sent}</dd>
-                </dl>
-              </div>
-            </div>
+        <Card>
+          <div className="flex flex-col gap-2">
+            <p className="text-sm font-medium text-gray-600">Sent</p>
+            <p className="text-3xl font-bold text-brand-black">{stats.sent}</p>
+            <p className="text-xs text-gray-500">Awaiting response</p>
           </div>
-        </div>
+        </Card>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg">
-          <div className="p-5">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="rounded-md bg-green-500 p-3">
-                  <svg
-                    className="h-6 w-6 text-gray-900"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
-                    Accepted
-                  </dt>
-                  <dd className="text-2xl font-bold text-gray-900">{stats.accepted}</dd>
-                </dl>
-              </div>
-            </div>
+        <Card>
+          <div className="flex flex-col gap-2">
+            <p className="text-sm font-medium text-gray-600">Accepted</p>
+            <p className="text-3xl font-bold text-accent-green">{stats.accepted}</p>
+            <p className="text-xs text-gray-500">Confirmed jobs</p>
           </div>
-        </div>
+        </Card>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg">
-          <div className="p-5">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="rounded-md bg-indigo-500 p-3">
-                  <svg
-                    className="h-6 w-6 text-gray-900"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
-                    Total Value
-                  </dt>
-                  <dd className="text-2xl font-bold text-gray-900">
-                    {formatCurrency(stats.totalValue)}
-                  </dd>
-                </dl>
-              </div>
-            </div>
+        <Card>
+          <div className="flex flex-col gap-2">
+            <p className="text-sm font-medium text-gray-600">Total Value</p>
+            <p className="text-3xl font-bold text-brand-black">{formatCurrency(stats.totalValue)}</p>
+            <p className="text-xs text-gray-500">Accepted quotes</p>
           </div>
-        </div>
+        </Card>
       </div>
 
       {/* Filters */}
-      <div className="bg-white shadow rounded-lg p-4 mb-6">
+      <Card className="mb-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex-1 max-w-md">
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" />
-              </div>
-              <Input
-                type="text"
-                placeholder="Search by quote ID, customer, or contractor..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-              />
-            </div>
+            <Input
+              type="text"
+              placeholder="Search by quote ID, customer, or contractor..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              startIcon={<MagnifyingGlassIcon className="h-5 w-5" />}
+            />
           </div>
 
           <div className="flex items-center gap-3">
@@ -336,7 +238,7 @@ export default function AdminQuotesPage() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as QuoteStatus | 'all')}
-              className="block rounded-md border-gray-200 shadow-sm focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
+              className="block rounded-md border-gray-200 shadow-sm focus:border-brand-orange focus:ring-brand-orange sm:text-sm"
             >
               <option value="all">All Statuses</option>
               <option value="requested">Requested</option>
@@ -347,10 +249,10 @@ export default function AdminQuotesPage() {
             </select>
           </div>
         </div>
-      </div>
+      </Card>
 
       {/* Quotes Table */}
-      <div className="bg-white shadow rounded-lg overflow-hidden">
+      <Card padding="none">
         <DataTable
           columns={columns}
           data={filteredQuotes}
@@ -368,7 +270,7 @@ export default function AdminQuotesPage() {
           }}
           sortable
         />
-      </div>
+      </Card>
     </div>
   );
 }

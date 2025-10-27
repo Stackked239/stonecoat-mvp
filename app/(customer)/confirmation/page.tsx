@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Customer Portal - Confirmation Page
  * Displays matched contractors after quote request submission
@@ -11,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/shared/Button';
 import { Card } from '@/components/shared/Card';
+import { Badge, StatusBadge, Spinner } from '@/components/shared/Badge';
 import { matchProsToRequest, getMatchExplanation } from '@/lib/utils/matching';
 import { getZipCodeData } from '@/lib/data/mockZipCodeData';
 import { mockPros } from '@/lib/data/mockPros';
@@ -107,8 +110,8 @@ export default function ConfirmationPage() {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <div className="mb-4 inline-block h-12 w-12 animate-spin rounded-full border-4 border-blue-600 border-t-transparent"></div>
-          <p className="text-lg text-gray-600">Finding the best contractors for you...</p>
+          <Spinner size="lg" className="mx-auto mb-4" />
+          <p className="text-lg text-brand-black/70">Finding the best contractors for you...</p>
         </div>
       </div>
     );
@@ -118,10 +121,10 @@ export default function ConfirmationPage() {
     return (
       <div className="mx-auto max-w-2xl px-4 py-12 text-center sm:px-6 lg:px-8">
         <div className="mb-6 text-6xl">😔</div>
-        <h1 className="mb-4 text-3xl font-bold text-gray-900">
+        <h1 className="font-bebas text-3xl md:text-4xl text-brand-black mb-4">
           No Contractors Available
         </h1>
-        <p className="mb-8 text-lg text-gray-600">
+        <p className="mb-8 text-lg text-brand-black/70">
           We couldn&apos;t find any certified contractors in your area at this time. Please try a different ZIP code or contact us directly.
         </p>
         <Link href="/request-quote">
@@ -138,33 +141,33 @@ export default function ConfirmationPage() {
       {/* Success Header */}
       <div className="mb-8 text-center">
         <div className="mb-4 flex justify-center">
-          <div className="rounded-full bg-green-100 p-3">
-            <CheckCircleIcon className="h-12 w-12 text-green-600" />
+          <div className="rounded-full bg-accent-green/20 p-3">
+            <CheckCircleIcon className="h-12 w-12 text-accent-green" />
           </div>
         </div>
-        <h1 className="mb-3 text-4xl font-bold text-gray-900">
+        <h1 className="font-bebas text-4xl md:text-5xl text-brand-black mb-3">
           Request Submitted Successfully!
         </h1>
-        <p className="text-lg text-gray-600">
+        <p className="text-lg text-brand-black/70">
           Hi {customerName}, we&apos;ve matched you with {matchedPros.length} certified contractors
         </p>
       </div>
 
       {/* Project Summary */}
       <Card padding="lg" className="mb-8">
-        <h2 className="mb-4 text-xl font-semibold text-gray-900">
+        <h2 className="mb-4 text-xl font-semibold text-brand-black">
           Your Project
         </h2>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
-            <p className="text-sm text-gray-600">Project Type</p>
-            <p className="font-medium text-gray-900">
+            <p className="text-sm text-brand-black/60">Project Type</p>
+            <p className="font-medium text-brand-black">
               {projectConfig?.label || projectInfo.type}
             </p>
           </div>
           <div>
-            <p className="text-sm text-gray-600">Square Footage</p>
-            <p className="font-medium text-gray-900">
+            <p className="text-sm text-brand-black/60">Square Footage</p>
+            <p className="font-medium text-brand-black">
               {projectInfo.squareFootage.toLocaleString()} sq ft
             </p>
           </div>
@@ -173,7 +176,7 @@ export default function ConfirmationPage() {
 
       {/* Matched Pros */}
       <div className="mb-8">
-        <h2 className="mb-6 text-2xl font-bold text-gray-900">
+        <h2 className="mb-6 text-2xl font-bold text-brand-black">
           Your Matched Contractors
         </h2>
         <div className="space-y-6">
@@ -181,40 +184,40 @@ export default function ConfirmationPage() {
             const reasons = getMatchExplanation(pro);
 
             return (
-              <Card key={pro.id} hoverable padding="lg">
+              <Card key={pro.id} hover padding="lg">
                 <div className="flex flex-col gap-6 lg:flex-row">
                   {/* Pro Info */}
                   <div className="flex-1">
                     <div className="mb-3 flex items-start justify-between">
                       <div>
-                        <h3 className="mb-1 text-xl font-bold text-gray-900">
+                        <h3 className="mb-1 text-xl font-bold text-brand-black">
                           {pro.businessName}
                         </h3>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-brand-black/60">
                           {(pro as any).contactPerson || pro.ownerName}
                         </p>
                       </div>
                       {pro.certificationLevel === 'master' && (
-                        <div className="flex items-center gap-1 rounded-full bg-blue-600 px-3 py-1 text-gray-900">
+                        <Badge variant="blue" className="flex items-center gap-1">
                           <ShieldCheckIcon className="h-4 w-4" />
                           <span className="text-sm font-medium">Master Certified</span>
-                        </div>
+                        </Badge>
                       )}
                     </div>
 
                     {/* Rating and Distance */}
                     <div className="mb-4 flex items-center gap-4 text-sm">
                       <div className="flex items-center gap-1">
-                        <StarIcon className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                        <span className="font-semibold text-gray-900">
+                        <StarIcon className="h-5 w-5 fill-accent-gold text-accent-gold" />
+                        <span className="font-semibold text-brand-black">
                           {pro.metrics.customerRating}
                         </span>
-                        <span className="text-gray-600">
+                        <span className="text-brand-black/60">
                           ({(pro as any).metrics.completedJobs || pro.metrics.jobsCompletedLast30} jobs)
                         </span>
                       </div>
                       {pro.distance !== undefined && (
-                        <div className="flex items-center gap-1 text-gray-600">
+                        <div className="flex items-center gap-1 text-brand-black/60">
                           <MapPinIcon className="h-4 w-4" />
                           {pro.distance.toFixed(1)} miles away
                         </div>
@@ -223,13 +226,13 @@ export default function ConfirmationPage() {
 
                     {/* Match Reasons */}
                     <div className="mb-4">
-                      <p className="mb-2 text-sm font-medium text-gray-600">
+                      <p className="mb-2 text-sm font-medium text-brand-black/70">
                         Why this pro is a great match:
                       </p>
                       <ul className="space-y-1">
                         {reasons.map((reason, index) => (
-                          <li key={index} className="flex items-start gap-2 text-sm text-gray-600">
-                            <CheckCircleIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-600" />
+                          <li key={index} className="flex items-start gap-2 text-sm text-brand-black/70">
+                            <CheckCircleIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent-green" />
                             {reason}
                           </li>
                         ))}
@@ -239,17 +242,18 @@ export default function ConfirmationPage() {
                     {/* Specialties */}
                     {pro.specialties && pro.specialties.length > 0 && (
                       <div className="mb-4">
-                        <p className="mb-2 text-sm font-medium text-gray-600">
+                        <p className="mb-2 text-sm font-medium text-brand-black/70">
                           Specialties:
                         </p>
                         <div className="flex flex-wrap gap-2">
                           {pro.specialties.map((specialty) => (
-                            <span
+                            <Badge
                               key={specialty}
-                              className="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-900"
+                              variant="gray"
+                              size="sm"
                             >
                               {specialty.replace('-', ' ')}
-                            </span>
+                            </Badge>
                           ))}
                         </div>
                       </div>
@@ -279,14 +283,14 @@ export default function ConfirmationPage() {
                   {/* Match Score Badge (for demo purposes) */}
                   {pro.matchScore !== undefined && (
                     <div className="lg:w-32">
-                      <div className="rounded-lg bg-blue-50 p-4 text-center">
-                        <p className="mb-1 text-sm font-medium text-blue-900">
+                      <div className="rounded-lg bg-accent-blue/10 p-4 text-center border border-accent-blue/20">
+                        <p className="mb-1 text-sm font-medium text-accent-blue">
                           Match Score
                         </p>
-                        <p className="text-3xl font-bold text-blue-600">
+                        <p className="text-3xl font-bold text-accent-blue">
                           {Math.round(pro.matchScore)}
                         </p>
-                        <p className="text-xs text-blue-700">out of 100</p>
+                        <p className="text-xs text-accent-blue/70">out of 100</p>
                       </div>
                     </div>
                   )}
@@ -298,32 +302,32 @@ export default function ConfirmationPage() {
       </div>
 
       {/* Next Steps */}
-      <Card padding="lg" className="bg-blue-50">
-        <h2 className="mb-4 text-xl font-semibold text-gray-900">
+      <Card padding="lg" className="bg-accent-blue/10 border border-accent-blue/20">
+        <h2 className="mb-4 text-xl font-semibold text-brand-black">
           What Happens Next?
         </h2>
         <ul className="space-y-3">
           <li className="flex items-start gap-3">
-            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-gray-900">
+            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand-orange text-sm font-bold text-white">
               1
             </div>
-            <p className="text-gray-600">
+            <p className="text-brand-black/70">
               Contact the contractors above directly to discuss your project and schedule consultations
             </p>
           </li>
           <li className="flex items-start gap-3">
-            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-gray-900">
+            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand-orange text-sm font-bold text-white">
               2
             </div>
-            <p className="text-gray-600">
+            <p className="text-brand-black/70">
               Contractors will provide detailed quotes and project timelines
             </p>
           </li>
           <li className="flex items-start gap-3">
-            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-gray-900">
+            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand-orange text-sm font-bold text-white">
               3
             </div>
-            <p className="text-gray-600">
+            <p className="text-brand-black/70">
               Compare quotes and select the contractor that best fits your needs
             </p>
           </li>

@@ -446,8 +446,8 @@ export default function QuoteBuilderPage() {
     <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       {/* Page Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Create New Quote</h1>
-        <p className="mt-2 text-sm text-gray-600">
+        <h1 className="text-3xl font-bold text-brand-black">Create New Quote</h1>
+        <p className="mt-2 text-sm text-brand-black/60">
           Build a detailed quote with materials and pricing for your customer
         </p>
       </div>
@@ -457,7 +457,7 @@ export default function QuoteBuilderPage() {
         <Card>
           <CardHeader>
             <div className="flex items-center gap-3">
-              <UserIcon className="w-6 h-6 text-primary-600" />
+              <UserIcon className="w-6 h-6 text-brand-orange" />
               <CardTitle>Customer Information</CardTitle>
             </div>
           </CardHeader>
@@ -540,7 +540,7 @@ export default function QuoteBuilderPage() {
         <Card>
           <CardHeader>
             <div className="flex items-center gap-3">
-              <DocumentTextIcon className="w-6 h-6 text-primary-600" />
+              <DocumentTextIcon className="w-6 h-6 text-brand-orange" />
               <CardTitle>Project Details</CardTitle>
             </div>
           </CardHeader>
@@ -548,13 +548,13 @@ export default function QuoteBuilderPage() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-medium text-gray-600">
-                  Project Type <span className="text-error-600">*</span>
+                <label className="text-sm font-medium text-brand-black/60">
+                  Project Type <span className="text-brand-orange">*</span>
                 </label>
                 <select
                   value={formState.projectType}
                   onChange={(e) => setFormState(prev => ({ ...prev, projectType: e.target.value as ProjectType }))}
-                  className="px-4 py-2 rounded-lg border border-gray-200 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  className="px-4 py-2 rounded-lg border border-gray-300 text-base text-brand-black focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-brand-orange"
                 >
                   <option value="">Select project type</option>
                   {Object.entries(PROJECT_TYPE_CONFIG).map(([key, config]) => (
@@ -564,7 +564,7 @@ export default function QuoteBuilderPage() {
                   ))}
                 </select>
                 {errors.projectType && (
-                  <p className="text-sm text-error-600">{errors.projectType}</p>
+                  <p className="text-sm text-brand-orange">{errors.projectType}</p>
                 )}
               </div>
 
@@ -581,13 +581,13 @@ export default function QuoteBuilderPage() {
               />
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-medium text-gray-600">
-                  Timeline <span className="text-error-600">*</span>
+                <label className="text-sm font-medium text-brand-black/60">
+                  Timeline <span className="text-brand-orange">*</span>
                 </label>
                 <select
                   value={formState.timeline}
                   onChange={(e) => setFormState(prev => ({ ...prev, timeline: e.target.value }))}
-                  className="px-4 py-2 rounded-lg border border-gray-200 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  className="px-4 py-2 rounded-lg border border-gray-300 text-base text-brand-black focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-brand-orange"
                 >
                   <option value="">Select timeline</option>
                   {TIMELINE_OPTIONS.map((option) => (
@@ -597,23 +597,23 @@ export default function QuoteBuilderPage() {
                   ))}
                 </select>
                 {errors.timeline && (
-                  <p className="text-sm text-error-600">{errors.timeline}</p>
+                  <p className="text-sm text-brand-orange">{errors.timeline}</p>
                 )}
               </div>
 
               <div className="flex flex-col gap-1.5 md:col-span-2">
-                <label className="text-sm font-medium text-gray-600">
-                  Project Description <span className="text-error-600">*</span>
+                <label className="text-sm font-medium text-brand-black/60">
+                  Project Description <span className="text-brand-orange">*</span>
                 </label>
                 <textarea
                   value={formState.description}
                   onChange={(e) => setFormState(prev => ({ ...prev, description: e.target.value }))}
                   rows={4}
-                  className="px-4 py-2 rounded-lg border border-gray-200 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  className="px-4 py-2 rounded-lg border border-gray-300 text-base text-brand-black focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-brand-orange"
                   placeholder="Describe the project scope, customer requirements, and any special considerations..."
                 />
                 {errors.description && (
-                  <p className="text-sm text-error-600">{errors.description}</p>
+                  <p className="text-sm text-brand-orange">{errors.description}</p>
                 )}
               </div>
             </div>
@@ -625,7 +625,7 @@ export default function QuoteBuilderPage() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <CubeIcon className="w-6 h-6 text-primary-600" />
+                <CubeIcon className="w-6 h-6 text-brand-orange" />
                 <CardTitle>Materials</CardTitle>
               </div>
               <Button
@@ -665,27 +665,27 @@ export default function QuoteBuilderPage() {
                       className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"
                     >
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-medium text-gray-900">{product.name}</h4>
-                        <p className="text-sm text-gray-600">{product.sku}</p>
-                        <p className="text-sm text-gray-500 mt-1">
+                        <h4 className="font-medium text-brand-black">{product.name}</h4>
+                        <p className="text-sm text-brand-black/60">{product.sku}</p>
+                        <p className="text-sm text-brand-black/50 mt-1">
                           {formatCurrency(item.unitPrice)} per {product.unit}
                         </p>
                       </div>
 
                       <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2">
-                          <label className="text-sm text-gray-600">Qty:</label>
+                          <label className="text-sm text-brand-black/60">Qty:</label>
                           <input
                             type="number"
                             min="1"
                             value={item.quantity}
                             onChange={(e) => handleUpdateQuantity(index, parseInt(e.target.value) || 0)}
-                            className="w-20 px-3 py-1.5 rounded border border-gray-200 text-center"
+                            className="w-20 px-3 py-1.5 rounded border border-gray-300 text-center text-brand-black focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-brand-orange"
                           />
                         </div>
 
                         <div className="text-right min-w-[100px]">
-                          <p className="font-semibold text-gray-900">
+                          <p className="font-semibold text-brand-black">
                             {formatCurrency(item.totalPrice)}
                           </p>
                         </div>
@@ -693,7 +693,7 @@ export default function QuoteBuilderPage() {
                         <button
                           type="button"
                           onClick={() => handleRemoveLineItem(index)}
-                          className="p-2 text-error-600 hover:bg-error-50 rounded-lg transition-colors"
+                          className="p-2 text-brand-orange hover:bg-brand-orange/10 rounded-lg transition-colors"
                           aria-label="Remove item"
                         >
                           <TrashIcon className="w-5 h-5" />
@@ -706,8 +706,8 @@ export default function QuoteBuilderPage() {
                 {/* Materials Subtotal */}
                 <div className="flex justify-end pt-4 border-t border-gray-200">
                   <div className="text-right">
-                    <p className="text-sm text-gray-600">Materials Subtotal</p>
-                    <p className="text-xl font-bold text-gray-900">
+                    <p className="text-sm text-brand-black/60">Materials Subtotal</p>
+                    <p className="text-xl font-bold text-brand-black">
                       {formatCurrency(pricing.materialsSubtotal)}
                     </p>
                   </div>
@@ -716,7 +716,7 @@ export default function QuoteBuilderPage() {
             )}
 
             {errors.lineItems && (
-              <p className="text-sm text-error-600 mt-2">{errors.lineItems}</p>
+              <p className="text-sm text-brand-orange mt-2">{errors.lineItems}</p>
             )}
           </CardContent>
         </Card>
@@ -725,7 +725,7 @@ export default function QuoteBuilderPage() {
         <Card>
           <CardHeader>
             <div className="flex items-center gap-3">
-              <CurrencyDollarIcon className="w-6 h-6 text-primary-600" />
+              <CurrencyDollarIcon className="w-6 h-6 text-brand-orange" />
               <CardTitle>Pricing</CardTitle>
             </div>
           </CardHeader>
@@ -747,29 +747,29 @@ export default function QuoteBuilderPage() {
 
                 {/* Suggested Rates */}
                 {suggestedRate && (
-                  <div className="mt-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                    <p className="text-sm font-medium text-blue-900 mb-2">
+                  <div className="mt-3 p-4 bg-accent-blue/10 border border-accent-blue/30 rounded-lg">
+                    <p className="text-sm font-medium text-brand-black mb-2">
                       Suggested rates for {formState.city} ({formState.zipCode}):
                     </p>
                     <div className="flex gap-2 flex-wrap">
                       <button
                         type="button"
                         onClick={() => handleApplySuggestedRate(suggestedRate.min)}
-                        className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-900 border border-gray-200 hover:bg-blue-200 transition-colors cursor-pointer"
+                        className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-brand-black border border-gray-300 hover:bg-accent-blue/20 hover:border-accent-blue transition-colors cursor-pointer"
                       >
                         Min: ${suggestedRate.min}/sqft
                       </button>
                       <button
                         type="button"
                         onClick={() => handleApplySuggestedRate(suggestedRate.recommended)}
-                        className="px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 border border-green-200 hover:bg-green-200 transition-colors cursor-pointer"
+                        className="px-3 py-1 rounded-full text-sm font-medium bg-accent-green/20 text-accent-green border border-accent-green/40 hover:bg-accent-green/30 transition-colors cursor-pointer"
                       >
                         Recommended: ${suggestedRate.recommended}/sqft
                       </button>
                       <button
                         type="button"
                         onClick={() => handleApplySuggestedRate(suggestedRate.max)}
-                        className="px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800 border border-yellow-200 hover:bg-yellow-200 transition-colors cursor-pointer"
+                        className="px-3 py-1 rounded-full text-sm font-medium bg-accent-gold/20 text-accent-gold border border-accent-gold/40 hover:bg-accent-gold/30 transition-colors cursor-pointer"
                       >
                         Max: ${suggestedRate.max}/sqft
                       </button>
@@ -799,45 +799,45 @@ export default function QuoteBuilderPage() {
               </div>
 
               {/* Pricing Summary */}
-              <div className="bg-gray-50 p-6 rounded-lg space-y-3">
-                <div className="flex justify-between text-gray-600">
+              <div className="bg-kraft-paper p-6 rounded-lg space-y-3 border border-brand-orange/20">
+                <div className="flex justify-between text-brand-black/70">
                   <span>Materials Subtotal</span>
-                  <span className="font-medium">{formatCurrency(pricing.materialsSubtotal)}</span>
+                  <span className="font-medium text-brand-black">{formatCurrency(pricing.materialsSubtotal)}</span>
                 </div>
 
-                <div className="flex justify-between text-gray-600">
+                <div className="flex justify-between text-brand-black/70">
                   <span>Labor ({formState.squareFootage || 0} sq ft × ${formState.laborRate || 0}/sqft)</span>
-                  <span className="font-medium">{formatCurrency(pricing.laborCost)}</span>
+                  <span className="font-medium text-brand-black">{formatCurrency(pricing.laborCost)}</span>
                 </div>
 
                 {pricing.adjustment !== 0 && (
-                  <div className="flex justify-between text-gray-600">
+                  <div className="flex justify-between text-brand-black/70">
                     <span>Adjustment {formState.adjustmentReason && `(${formState.adjustmentReason})`}</span>
-                    <span className="font-medium">
+                    <span className="font-medium text-brand-black">
                       {pricing.adjustment > 0 ? '+' : ''}
                       {formatCurrency(pricing.adjustment)}
                     </span>
                   </div>
                 )}
 
-                <div className="flex justify-between text-gray-600 pt-3 border-t border-gray-200">
+                <div className="flex justify-between text-brand-black/70 pt-3 border-t border-brand-orange/30">
                   <span>Subtotal</span>
-                  <span className="font-medium">{formatCurrency(pricing.subtotal)}</span>
+                  <span className="font-medium text-brand-black">{formatCurrency(pricing.subtotal)}</span>
                 </div>
 
-                <div className="flex justify-between text-gray-600">
+                <div className="flex justify-between text-brand-black/70">
                   <span>Tax (7%)</span>
-                  <span className="font-medium">{formatCurrency(pricing.tax)}</span>
+                  <span className="font-medium text-brand-black">{formatCurrency(pricing.tax)}</span>
                 </div>
 
-                <div className="flex justify-between text-xl font-bold text-gray-900 pt-3 border-t-2 border-gray-400">
+                <div className="flex justify-between text-xl font-bold text-brand-black pt-3 border-t-2 border-brand-orange">
                   <span>Total</span>
-                  <span>{formatCurrency(pricing.total)}</span>
+                  <span className="text-brand-orange">{formatCurrency(pricing.total)}</span>
                 </div>
 
                 <div className="text-center pt-2">
-                  <p className="text-sm text-gray-600">
-                    Rate per square foot: <span className="font-semibold text-gray-900">
+                  <p className="text-sm text-brand-black/70">
+                    Rate per square foot: <span className="font-semibold text-brand-black">
                       {formatCurrency(pricing.perSqFtRate)}/sqft
                     </span>
                   </p>
@@ -878,21 +878,21 @@ export default function QuoteBuilderPage() {
       {/* Material Selector Modal */}
       {showMaterialSelector && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-brand-xl border border-brand-orange/20">
             {/* Modal Header */}
-            <div className="p-6 border-b border-gray-200">
-              <h2 className="text-2xl font-bold text-gray-900">Add Materials</h2>
+            <div className="p-6 border-b border-brand-orange/20">
+              <h2 className="text-2xl font-bold text-brand-black">Add Materials</h2>
 
               {/* Search and Filter */}
               <div className="mt-4 space-y-4">
                 <div className="relative">
-                  <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                  <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-black/40" />
                   <input
                     type="text"
                     value={materialSearch}
                     onChange={(e) => setMaterialSearch(e.target.value)}
                     placeholder="Search by name, SKU, or description..."
-                    className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-brand-black focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-brand-orange"
                   />
                 </div>
 
@@ -912,8 +912,8 @@ export default function QuoteBuilderPage() {
                       className={cn(
                         'px-3 py-1 rounded-full text-sm font-medium border transition-colors cursor-pointer',
                         selectedCategory === category.id
-                          ? 'bg-primary-100 text-primary-800 border-primary-200'
-                          : 'bg-gray-100 text-gray-900 border-gray-200 hover:bg-gray-200'
+                          ? 'bg-brand-orange text-white border-brand-orange'
+                          : 'bg-gray-100 text-brand-black border-gray-300 hover:bg-brand-orange/10 hover:border-brand-orange/40'
                       )}
                     >
                       {category.label}
@@ -927,34 +927,34 @@ export default function QuoteBuilderPage() {
             <div className="flex-1 overflow-y-auto p-6">
               {filteredMaterials.length === 0 ? (
                 <div className="text-center py-12">
-                  <p className="text-gray-600">No materials found matching your search</p>
+                  <p className="text-brand-black/60">No materials found matching your search</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {filteredMaterials.map((product) => (
                     <div
                       key={product.id}
-                      className="p-4 border border-gray-200 rounded-lg hover:border-primary-500 transition-colors cursor-pointer"
+                      className="p-4 border border-gray-300 rounded-lg hover:border-brand-orange hover:shadow-brand-sm transition-all cursor-pointer"
                       onClick={() => handleAddMaterial(product)}
                     >
                       <div className="flex justify-between items-start mb-2">
                         <div className="flex-1">
-                          <h3 className="font-semibold text-gray-900">{product.name}</h3>
-                          <p className="text-sm text-gray-600">{product.sku}</p>
+                          <h3 className="font-semibold text-brand-black">{product.name}</h3>
+                          <p className="text-sm text-brand-black/60">{product.sku}</p>
                         </div>
-                        <Badge label={product.category} variant="neutral" size="sm" />
+                        <Badge variant="orange">{product.category}</Badge>
                       </div>
 
-                      <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                      <p className="text-sm text-brand-black/70 mb-3 line-clamp-2">
                         {product.description}
                       </p>
 
                       <div className="flex justify-between items-center">
                         <div>
-                          <p className="text-lg font-bold text-primary-600">
+                          <p className="text-lg font-bold text-brand-orange">
                             {formatCurrency(product.proCost)}
                           </p>
-                          <p className="text-xs text-gray-500">per {product.unit}</p>
+                          <p className="text-xs text-brand-black/50">per {product.unit}</p>
                         </div>
 
                         <Button
@@ -970,7 +970,7 @@ export default function QuoteBuilderPage() {
                       </div>
 
                       {product.stockLevel <= product.reorderLevel && (
-                        <p className="text-xs text-warning-600 mt-2">
+                        <p className="text-xs text-accent-gold mt-2">
                           Low stock: {product.stockLevel} {product.unit}s remaining
                         </p>
                       )}
@@ -981,7 +981,7 @@ export default function QuoteBuilderPage() {
             </div>
 
             {/* Modal Footer */}
-            <div className="p-6 border-t border-gray-200">
+            <div className="p-6 border-t border-brand-orange/20">
               <Button
                 variant="outline"
                 onClick={() => {

@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * PageHeader Component
  * Reusable page header with title, breadcrumbs, description, and action buttons

@@ -1,0 +1,59 @@
+{
+  "login": {
+    "success": true,
+    "url": "http://localhost:3002/pro/dashboard"
+  },
+  "dashboard": {
+    "success": false,
+    "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('nav a[href=\"/pro/dashboard\"]')\u001b[22m\n"
+  },
+  "quotes": {
+    "success": false,
+    "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('nav a[href=\"/pro/quotes\"]')\u001b[22m\n"
+  },
+  "jobs": {
+    "success": false,
+    "url": "http://localhost:3002/pro/jobs",
+    "errors": 0,
+    "pageContent": "SStonecoatPro PortalDashboardQuotesJobsInventoryOrdersTampa Premium Coatingsmike@tampacoatings.comTDashboardQuotesJobsInventoryOrdersJob PipelineTrack your jobs from scheduling to completionTotal Active Jobs0Scheduled This Week0Completed This Month0All Jobs (2)This WeekThis MonthCompletedQuote Sent1John MitchellGarage FloorQuote Sent400 sq ftTampa, FLScheduled Oct 25, 2024Customer requested quote via website. Follow up scheduled for Oct 23.View DetailsMaterials Ordered0No jobsScheduled0No jobsIn"
+  },
+  "inventory": {
+    "success": false,
+    "url": "http://localhost:3002/pro/inventory",
+    "errors": 1,
+    "pageContent": "SStonecoatPro PortalDashboardQuotesJobsInventoryOrdersTampa Premium Coatingsmike@tampacoatings.comTDashboardQuotesJobsInventoryOrdersProduct InventoryBrowse and order Stonecoat materials at pro pricingView Cart All ProductsBase CoatsTop CoatsFlakesMetallicPrimersToolsShowing 70 productsCountertop FX PoxySC-BASE-001Premium grade epoxy base coat for countertops and floors. High clarity, self-leveling formula.Coverage: 200 sqft per gallon at 8 milspremiumcountertopsfloors+1$89.99per gallon$149.99Pr"
+  },
+  "orders": {
+    "success": false,
+    "url": "http://localhost:3002/pro/orders",
+    "errors": 3,
+    "pageContent": "(self.__next_f=self.__next_f||[]).push([0])self.__next_f.push([1,\"7:I[\\\"[project]/node_modules/next/dist/next-devtools/userspace/app/segment-explorer-node.js [app-client] (ecmascript)\\\",[\\\"/_next/static/chunks/node_modules_next_dist_8db7fb1f._.js\\\",\\\"/_next/static/chunks/app_favicon_ico_mjs_e98bdb63._.js\\\"],\\\"SegmentViewNode\\\"]\\n9:\\\"$Sreact.fragment\\\"\\n17:I[\\\"[project]/node_modules/next/dist/client/components/layout-router.js [app-client] (ecmascript)\\\",[\\\"/_next/static/chunks/node_modules_next_"
+  },
+  "consoleErrors": [
+    {
+      "text": "%o\n\n%s TypeError: Cannot read properties of undefined (reading 'length')\n    at Object.render (http://localhost:3002/_next/static/chunks/_0926a009._.js:3880:37)\n    at http://localhost:3002/_next/static/chunks/_0926a009._.js:803:90\n    at Array.map (<anonymous>)\n    at http://localhost:3002/_next/static/chunks/_0926a009._.js:801:57\n    at Array.map (<anonymous>)\n    at DataTable (http://localhost:3002/_next/static/chunks/_0926a009._.js:798:61)\n    at Object.react_stack_bottom_frame (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:13072:24)\n    at renderWithHooks (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:4091:24)\n    at updateFunctionComponent (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:5523:21)\n    at beginWork (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:6111:24)\n    at runWithFiberInDEV (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:886:74)\n    at performUnitOfWork (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8298:97)\n    at workLoopSync (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8190:40)\n    at renderRootSync (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8173:13)\n    at performWorkOnRoot (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:7932:56)\n    at performWorkOnRootViaSchedulerTask (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8882:9)\n    at MessagePort.performWorkUntilDeadline (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_5150ccfd._.js:2601:64) The above error occurred in the <DataTable> component. It was handled by the <ErrorBoundaryHandler> error boundary.",
+      "location": {
+        "url": "http://localhost:3002/_next/static/chunks/node_modules_next_dist_client_cf1d9188._.js",
+        "lineNumber": 1247,
+        "columnNumber": 24
+      }
+    },
+    {
+      "text": "Application error: TypeError: Cannot read properties of undefined (reading 'length')\n    at Object.render (http://localhost:3002/_next/static/chunks/_0926a009._.js:3880:37)\n    at http://localhost:3002/_next/static/chunks/_0926a009._.js:803:90\n    at Array.map (<anonymous>)\n    at http://localhost:3002/_next/static/chunks/_0926a009._.js:801:57\n    at Array.map (<anonymous>)\n    at DataTable (http://localhost:3002/_next/static/chunks/_0926a009._.js:798:61)\n    at Object.react_stack_bottom_frame (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:13072:24)\n    at renderWithHooks (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:4091:24)\n    at updateFunctionComponent (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:5523:21)\n    at beginWork (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:6111:24)\n    at runWithFiberInDEV (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:886:74)\n    at performUnitOfWork (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8298:97)\n    at workLoopSync (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8190:40)\n    at renderRootSync (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8173:13)\n    at performWorkOnRoot (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:7932:56)\n    at performWorkOnRootViaSchedulerTask (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8882:9)\n    at MessagePort.performWorkUntilDeadline (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_5150ccfd._.js:2601:64)",
+      "location": {
+        "url": "http://localhost:3002/_next/static/chunks/node_modules_next_dist_b0daae9a._.js",
+        "lineNumber": 2359,
+        "columnNumber": 31
+      }
+    },
+    {
+      "text": "Application error: TypeError: Cannot read properties of undefined (reading 'length')\n    at Object.render (http://localhost:3002/_next/static/chunks/_0926a009._.js:3880:37)\n    at http://localhost:3002/_next/static/chunks/_0926a009._.js:803:90\n    at Array.map (<anonymous>)\n    at http://localhost:3002/_next/static/chunks/_0926a009._.js:801:57\n    at Array.map (<anonymous>)\n    at DataTable (http://localhost:3002/_next/static/chunks/_0926a009._.js:798:61)\n    at Object.react_stack_bottom_frame (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:13072:24)\n    at renderWithHooks (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:4091:24)\n    at updateFunctionComponent (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:5523:21)\n    at beginWork (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:6111:24)\n    at runWithFiberInDEV (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:886:74)\n    at performUnitOfWork (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8298:97)\n    at workLoopSync (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8190:40)\n    at renderRootSync (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8173:13)\n    at performWorkOnRoot (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:7932:56)\n    at performWorkOnRootViaSchedulerTask (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8882:9)\n    at MessagePort.performWorkUntilDeadline (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_5150ccfd._.js:2601:64)",
+      "location": {
+        "url": "http://localhost:3002/_next/static/chunks/node_modules_next_dist_b0daae9a._.js",
+        "lineNumber": 2359,
+        "columnNumber": 31
+      }
+    }
+  ],
+  "pageErrors": []
+}

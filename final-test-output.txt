@@ -1,0 +1,103 @@
+
+========================================
+   PRO PORTAL VERIFICATION TEST
+========================================
+
+📝 Phase 1: Testing Login...
+✅ Login: PASSED
+
+📝 Phase 2: Testing Dashboard...
+❌ Dashboard: FAILED - page.waitForSelector: Timeout 5000ms exceeded.
+Call log:
+[2m  - waiting for locator('text=Performance Overview') to be visible[22m
+ 
+
+📝 Phase 3: Testing Quotes Page...
+✅ Quotes: PASSED
+
+📝 Phase 4: Testing Jobs Page...
+✅ Jobs: PASSED
+
+📝 Phase 5: Testing Inventory Page...
+❌ Console Error: React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element. startIcon starticon
+✅ Inventory: PASSED
+
+📝 Phase 6: Testing Orders Page (CRITICAL - was broken)...
+❌ Console Error: %o
+
+%s TypeError: Cannot read properties of undefined (reading 'length')
+    at Object.render (http://localhost:3002/_next/static/chunks/_0926a009._.js:3881:37)
+    at http://localhost:3002/_next/static/chunks/_0926a009._.js:803:90
+    at Array.map (<anonymous>)
+    at http://localhost:3002/_next/static/chunks/_0926a009._.js:801:57
+    at Array.map (<anonymous>)
+    at DataTable (http://localhost:3002/_next/static/chunks/_0926a009._.js:798:61)
+    at Object.react_stack_bottom_frame (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:13072:24)
+    at renderWithHooks (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:4091:24)
+    at updateFunctionComponent (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:5523:21)
+    at beginWork (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:6111:24)
+    at runWithFiberInDEV (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:886:74)
+    at performUnitOfWork (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8298:97)
+    at workLoopSync (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8190:40)
+    at renderRootSync (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8173:13)
+    at performWorkOnRoot (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:7932:56)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8882:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_5150ccfd._.js:2601:64) The above error occurred in the <DataTable> component. It was handled by the <ErrorBoundaryHandler> error boundary.
+❌ Console Error: Application error: TypeError: Cannot read properties of undefined (reading 'length')
+    at Object.render (http://localhost:3002/_next/static/chunks/_0926a009._.js:3881:37)
+    at http://localhost:3002/_next/static/chunks/_0926a009._.js:803:90
+    at Array.map (<anonymous>)
+    at http://localhost:3002/_next/static/chunks/_0926a009._.js:801:57
+    at Array.map (<anonymous>)
+    at DataTable (http://localhost:3002/_next/static/chunks/_0926a009._.js:798:61)
+    at Object.react_stack_bottom_frame (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:13072:24)
+    at renderWithHooks (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:4091:24)
+    at updateFunctionComponent (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:5523:21)
+    at beginWork (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:6111:24)
+    at runWithFiberInDEV (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:886:74)
+    at performUnitOfWork (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8298:97)
+    at workLoopSync (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8190:40)
+    at renderRootSync (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8173:13)
+    at performWorkOnRoot (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:7932:56)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8882:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_5150ccfd._.js:2601:64)
+❌ Console Error: Application error: TypeError: Cannot read properties of undefined (reading 'length')
+    at Object.render (http://localhost:3002/_next/static/chunks/_0926a009._.js:3881:37)
+    at http://localhost:3002/_next/static/chunks/_0926a009._.js:803:90
+    at Array.map (<anonymous>)
+    at http://localhost:3002/_next/static/chunks/_0926a009._.js:801:57
+    at Array.map (<anonymous>)
+    at DataTable (http://localhost:3002/_next/static/chunks/_0926a009._.js:798:61)
+    at Object.react_stack_bottom_frame (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:13072:24)
+    at renderWithHooks (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:4091:24)
+    at updateFunctionComponent (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:5523:21)
+    at beginWork (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:6111:24)
+    at runWithFiberInDEV (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:886:74)
+    at performUnitOfWork (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8298:97)
+    at workLoopSync (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8190:40)
+    at renderRootSync (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8173:13)
+    at performWorkOnRoot (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:7932:56)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8882:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3002/_next/static/chunks/node_modules_next_dist_compiled_5150ccfd._.js:2601:64)
+❌ Orders: FAILED - Orders page shows error message 
+
+
+========================================
+         VERIFICATION RESULTS
+========================================
+
+✅ Passed: 4/6
+❌ Failed: 2/6
+📊 Success Rate: 67%
+
+⚠️  Console Errors Detected: 4
+
+📁 Screenshots saved to: /Users/austinwarren/Stone-Coat MVP/stonecoat-mvp/verification-screenshots
+📄 Results saved to: verification-results.json
+
+========================================
+   ⚠️  SOME TESTS FAILED
+   Review errors above for details
+========================================
+
+Browser will remain open for 10 seconds...

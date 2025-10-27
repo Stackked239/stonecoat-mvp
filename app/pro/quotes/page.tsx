@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Pro Portal - Quotes List Page
  * Displays customer requests and pro-created quotes
@@ -12,7 +14,7 @@ import { PageHeader } from '@/components/shared/PageHeader';
 import { DataTable, DataTableColumn, DataTableAction } from '@/components/shared/DataTable';
 import { Badge } from '@/components/shared/Badge';
 import { Button } from '@/components/shared/Button';
-import { Card } from '@/components/shared/Card';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/shared/Card';
 import { mockQuotes } from '@/lib/data/mockQuotes';
 import { Quote, QuoteStatus } from '@/lib/types/quote';
 import { formatDate, formatSquareFootage, formatProjectType } from '@/lib/utils/formatting';
@@ -39,6 +41,7 @@ export default function QuotesPage() {
 
   // Filter quotes by logged-in pro
   const proQuotes = useMemo(() => {
+    if (!mockQuotes || !Array.isArray(mockQuotes)) return [];
     return mockQuotes.filter(quote => {
       // Include customer-initiated quotes that matched this pro
       if (quote.type === 'customer-initiated') {
@@ -96,8 +99,8 @@ export default function QuotesPage() {
       sortable: true,
       render: (_, quote) => (
         <div>
-          <div className="font-medium text-gray-900">{quote.customer.name}</div>
-          <div className="text-sm text-gray-500">{quote.customer.email}</div>
+          <div className="font-medium text-brand-black">{quote.customer.name}</div>
+          <div className="text-sm text-brand-black/60">{quote.customer.email}</div>
         </div>
       ),
     },
@@ -106,10 +109,10 @@ export default function QuotesPage() {
       label: 'Project',
       render: (_, quote) => (
         <div>
-          <div className="font-medium text-gray-900">
+          <div className="font-medium text-brand-black">
             {formatProjectType(quote.project.type)}
           </div>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-brand-black/60">
             {formatSquareFootage(quote.project.squareFootage)}
           </div>
         </div>
@@ -119,7 +122,7 @@ export default function QuotesPage() {
       key: 'location',
       label: 'Location',
       render: (_, quote) => (
-        <div className="text-sm">
+        <div className="text-sm text-brand-black/70">
           {quote.customer.address.city}, {quote.customer.address.state}
         </div>
       ),
@@ -129,7 +132,7 @@ export default function QuotesPage() {
       label: 'Requested',
       sortable: true,
       render: (_, quote) => (
-        <div className="text-sm text-gray-600">
+        <div className="text-sm text-brand-black/60">
           {formatDate(quote.createdAt)}
         </div>
       ),
@@ -150,8 +153,8 @@ export default function QuotesPage() {
       sortable: true,
       render: (_, quote) => (
         <div>
-          <div className="font-medium text-gray-900">{quote.customer.name}</div>
-          <div className="text-sm text-gray-500">{quote.customer.email}</div>
+          <div className="font-medium text-brand-black">{quote.customer.name}</div>
+          <div className="text-sm text-brand-black/60">{quote.customer.email}</div>
         </div>
       ),
     },
@@ -160,10 +163,10 @@ export default function QuotesPage() {
       label: 'Project',
       render: (_, quote) => (
         <div>
-          <div className="font-medium text-gray-900">
+          <div className="font-medium text-brand-black">
             {formatProjectType(quote.project.type)}
           </div>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-brand-black/60">
             {formatSquareFootage(quote.project.squareFootage)}
           </div>
         </div>
@@ -180,7 +183,7 @@ export default function QuotesPage() {
       label: 'Date',
       sortable: true,
       render: (_, quote) => (
-        <div className="text-sm text-gray-600">
+        <div className="text-sm text-brand-black/60">
           {formatDate(quote.createdAt)}
         </div>
       ),
@@ -238,15 +241,15 @@ export default function QuotesPage() {
       {/* Customer Requests Section */}
       <section>
         <Card>
-          <Card.Header className="mb-6">
+          <CardHeader className="mb-6">
             <div>
-              <Card.Title>Customer Requests</Card.Title>
-              <Card.Description>
+              <CardTitle>Customer Requests</CardTitle>
+              <CardDescription>
                 New quote requests from customers that need your response
-              </Card.Description>
+              </CardDescription>
             </div>
             <Badge variant="primary" label={`${customerRequests.length}`} size="lg" />
-          </Card.Header>
+          </CardHeader>
 
           <DataTable
             columns={requestColumns}
@@ -284,14 +287,14 @@ export default function QuotesPage() {
       {/* My Quotes Section */}
       <section>
         <Card>
-          <Card.Header className="mb-6">
+          <CardHeader className="mb-6">
             <div>
-              <Card.Title>My Quotes</Card.Title>
-              <Card.Description>
+              <CardTitle>My Quotes</CardTitle>
+              <CardDescription>
                 Track all quotes you&apos;ve created and their status
-              </Card.Description>
+              </CardDescription>
             </div>
-          </Card.Header>
+          </CardHeader>
 
           {/* Filters */}
           <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -322,7 +325,7 @@ export default function QuotesPage() {
                   placeholder="Search by customer name or quote ID..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-primary-600"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg text-brand-black focus:ring-2 focus:ring-brand-orange focus:border-brand-orange"
                 />
               </div>
             </div>
@@ -333,7 +336,7 @@ export default function QuotesPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value as QuoteStatus | 'all')}
-                className="block pl-3 pr-10 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-primary-600"
+                className="block pl-3 pr-10 py-2 border border-gray-300 rounded-lg text-brand-black focus:ring-2 focus:ring-brand-orange focus:border-brand-orange"
               >
                 {statusOptions.map((option) => (
                   <option key={option.value} value={option.value}>

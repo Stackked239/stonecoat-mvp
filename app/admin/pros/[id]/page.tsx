@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Admin Contractor Detail Page
  * Detailed contractor profile with performance metrics, quotes, and jobs
@@ -23,9 +25,6 @@ import {
   PhoneIcon,
   MapPinIcon,
   StarIcon,
-  ChartBarIcon,
-  CurrencyDollarIcon,
-  TrophyIcon,
 } from '@heroicons/react/24/outline';
 import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
 
@@ -303,72 +302,56 @@ export default function ContractorDetailPage({ params }: ContractorDetailPagePro
           {/* Performance Metrics Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Card>
-              <div className="p-6">
+              <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-500">Customer Rating</p>
-                    <div className="mt-2">
-                      <RatingStars rating={pro.metrics.customerRating} />
-                    </div>
-                  </div>
-                  <div className="rounded-full bg-yellow-100 p-3">
-                    <StarIconSolid className="w-6 h-6 text-yellow-600" />
-                  </div>
+                  <p className="text-sm font-medium text-gray-600">Customer Rating</p>
+                  <span className="text-2xl">⭐</span>
+                </div>
+                <div className="mt-1">
+                  <RatingStars rating={pro.metrics.customerRating} />
                 </div>
               </div>
             </Card>
 
             <Card>
-              <div className="p-6">
+              <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-500">Total Revenue</p>
-                    <p className="mt-2 text-2xl font-bold text-gray-900">
-                      {formatCurrency(pro.metrics.totalRevenue)}
-                    </p>
-                  </div>
-                  <div className="rounded-full bg-green-100 p-3">
-                    <CurrencyDollarIcon className="w-6 h-6 text-green-600" />
-                  </div>
+                  <p className="text-sm font-medium text-gray-600">Total Revenue</p>
+                  <span className="text-2xl">💰</span>
                 </div>
+                <p className="text-2xl font-bold text-brand-black">
+                  {formatCurrency(pro.metrics.totalRevenue)}
+                </p>
               </div>
             </Card>
 
             <Card>
-              <div className="p-6">
+              <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-500">Quotes & Win Rate</p>
-                    <p className="mt-2 text-2xl font-bold text-gray-900">
-                      {pro.metrics.wonQuotes}/{pro.metrics.totalQuotes}
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      {formatPercentage(pro.metrics.winRate)} win rate
-                    </p>
-                  </div>
-                  <div className="rounded-full bg-blue-100 p-3">
-                    <ChartBarIcon className="w-6 h-6 text-blue-600" />
-                  </div>
+                  <p className="text-sm font-medium text-gray-600">Quotes & Win Rate</p>
+                  <span className="text-2xl">📊</span>
                 </div>
+                <p className="text-2xl font-bold text-brand-black">
+                  {pro.metrics.wonQuotes}/{pro.metrics.totalQuotes}
+                </p>
+                <p className="text-sm text-gray-600">
+                  {formatPercentage(pro.metrics.winRate)} win rate
+                </p>
               </div>
             </Card>
 
             <Card>
-              <div className="p-6">
+              <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-500">Avg Job Value</p>
-                    <p className="mt-2 text-2xl font-bold text-gray-900">
-                      {formatCurrency(pro.metrics.avgJobValue)}
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      {pro.metrics.jobsCompletedLast30} last 30 days
-                    </p>
-                  </div>
-                  <div className="rounded-full bg-purple-100 p-3">
-                    <TrophyIcon className="w-6 h-6 text-purple-600" />
-                  </div>
+                  <p className="text-sm font-medium text-gray-600">Avg Job Value</p>
+                  <span className="text-2xl">🏆</span>
                 </div>
+                <p className="text-2xl font-bold text-brand-black">
+                  {formatCurrency(pro.metrics.avgJobValue)}
+                </p>
+                <p className="text-sm text-gray-600">
+                  {pro.metrics.jobsCompletedLast30} last 30 days
+                </p>
               </div>
             </Card>
           </div>

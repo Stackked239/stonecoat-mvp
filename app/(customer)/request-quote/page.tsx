@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Customer Portal - Request Quote Page
  * Form for customers to submit quote requests
@@ -97,10 +99,10 @@ export default function RequestQuotePage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-8 text-center">
-        <h1 className="mb-4 text-4xl font-bold text-gray-900">
+        <h1 className="font-bebas text-4xl md:text-5xl text-brand-black mb-4">
           Request a Free Quote
         </h1>
-        <p className="text-lg text-gray-600">
+        <p className="text-lg text-brand-black/70">
           Tell us about your project and get matched with certified contractors
         </p>
       </div>
@@ -109,7 +111,7 @@ export default function RequestQuotePage() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Contact Information Section */}
           <div>
-            <h2 className="mb-4 text-xl font-semibold text-gray-900">
+            <h2 className="mb-4 text-xl font-semibold text-brand-black">
               Contact Information
             </h2>
             <div className="space-y-4">
@@ -154,7 +156,7 @@ export default function RequestQuotePage() {
 
           {/* Project Location Section */}
           <div className="pt-6">
-            <h2 className="mb-4 text-xl font-semibold text-gray-900">
+            <h2 className="mb-4 text-xl font-semibold text-brand-black">
               Project Location
             </h2>
             <div className="space-y-4">
@@ -205,7 +207,7 @@ export default function RequestQuotePage() {
 
           {/* Project Details Section */}
           <div className="pt-6">
-            <h2 className="mb-4 text-xl font-semibold text-gray-900">
+            <h2 className="mb-4 text-xl font-semibold text-brand-black">
               Project Details
             </h2>
             <div className="space-y-4">
@@ -308,7 +310,7 @@ export default function RequestQuotePage() {
             >
               Cancel
             </Button>
-            <Button type="submit" variant="primary" size="lg" isLoading={loading}>
+            <Button type="submit" variant="primary" size="lg" loading={loading}>
               Get Free Quotes
             </Button>
           </div>
@@ -317,7 +319,7 @@ export default function RequestQuotePage() {
 
       {/* Trust Indicators */}
       <div className="mt-8 text-center">
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-brand-black/60">
           By submitting this form, you agree to be contacted by certified contractors.
           <br />
           Your information is secure and will never be sold.
